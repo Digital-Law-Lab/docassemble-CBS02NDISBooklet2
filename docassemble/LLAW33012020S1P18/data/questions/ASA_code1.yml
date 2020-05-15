@@ -1,0 +1,220 @@
+---
+objects: 
+  - endpoint: DADict
+---
+# This is the welcome screen 
+mandatory: True
+question: |
+  Preparing for your NDIS planning meeting with CBS Inc. 
+subquestion: |
+  This program will help you get ready for your NDIS planning meeting. 
+
+  *This application is only for use by people with intellectual disabilities. 
+  
+  **You should have a support worker with you while using this program. If you are under 18 you must have a support worker or family member with you.**
+  
+  ***Disclaimer***
+  
+  This program is **not** legal advice. 
+  
+  Answer all questions honestly. 
+  
+  This program does not guarantee that you will receive funding from NDIS. It will help you prepare for the planning meeting. 
+  
+  **The NDIA will make the final decision.**
+  
+  Do you agree to these terms? 
+
+buttons:
+  -  Yes: continue
+  -  No: exit
+     url: https://communitybridgingservices.org.au/
+---
+# This code block drives the interview. Initial requirements. 
+mandatory: True 
+code: | 
+  if ASAvalidity_ok == True: 
+    endpoint['eligible']
+  else: 
+    endpoint['ineligible'] 
+---
+# This question block asks the questions to drive the code block above
+question: Has the NDIS granted you access to the Scheme as someone with an intellectual disability or learning difficulty?  
+fields: 
+  - no label: ASAeligiblity
+    choices: 
+      - Yes
+      - No
+---
+#This code block works out ASAeligibility_ok
+code: | 
+  if ASAeligibility == 'Yes': 
+    ASAeligibility_ok = True   
+  else: 
+    ASAeligibility_ok = False  
+--- 
+# This is ineligible endpoint
+event: endpoint['ineligible']
+question: This application is only for individuals with intellectual disabilities who have been granted access to the NDIS. 
+subquestion: |
+    You cannot use this service. Please seek talk to your CBS worker or a family member for help. 
+buttons: 
+  - Exit: exit
+  - Restart: restart
+---
+# This is the eligible endpoint
+event: endpoint['eligible']
+question: COMPLETED
+subquestion: |
+  ### BOOKLET 2- PREPARING FOR YOUR PLANNING MEETING
+  
+  Thank you for providing the relevant information for your NDIS planning meeting. We have collected this data from you. Please confirm that it is correct 
+
+  Information|Your Input
+  -----------|----------
+  Name               | ${ ASAfirstname } ${ ASAlatname } 
+  NDIS number        | ${ ASAndisnumber } 
+  Age                | ${ ASAage } 
+  Disability Impact  | ${ ASAdisability }  
+  Important People   | ${ ASAperon } 
+  
+ 
+ # Rest of data will be entered here... 
+  
+    **This document was filed on ${ today() }** 
+attachment: 
+  docx template file: Booklet_2.docx
+  valid formats: 
+    - pdf
+buttons:
+  - Edit: restart
+  - Done: exit
+    url: https://communitybridgingservices.org.au/
+---
+question: Write your name.  
+fields: 
+  - First Name: ASAfirstname
+    datatype: text
+  - Last Name: ASAlastname
+    datatype: text
+---
+question: Write your NDIS number. 
+fields: 
+  - no label: ASAndisnumber
+    datatype: integer
+--- 
+question: Write how old you are.  
+fields: 
+  - no label: ASAage
+    datatype: integer
+---
+question: Write about your disability or {developmental delay}. 
+subquestion: | 
+  Also write about how your disability or developmental delay affects your life. 
+fields: 
+  - no label: ASAdisability 
+    datatype: text
+term: 
+  developmental delay: | 
+    Developmental delay means a person finds it hard to do everyday things. For example, have a conversation
+--- 
+question: Write about important people in your life who do not work in disability services. For example, write about your family and friends. 
+fields:
+  - Pick the people who are close to you: ASApeople
+    datatype: checkboxes
+    choices: 
+    - Mother
+    - Father
+    - Sister
+    - Brother
+    - Friend
+    - Other Family Member
+    - Other (for example, boss) 
+  - Write about your mother here: ASAmother
+    input type: area
+    show if: 
+    variable: ASApeople
+    is: 'Mother' 
+  - Write about your father here: ASAfather
+    input type: area
+    show if: 
+    variable: ASApeople
+    is: 'Father' 
+  - Write about your brother here: ASAbrother
+    input type: area
+    show if: 
+    variable: ASApeople
+    is: 'Brother' 
+  - Write about your sister here: ASAsister
+    input type: area
+    show if: 
+    variable: ASApeople
+    is: 'Sister' 
+  - Write about your friend here: ASAfriend
+    input type: area
+    show if: 
+    variable: ASApeople
+    is: 'Friend' 
+ - Write about your other family member here: ASAotherfamily
+   input type: area
+   show if: 
+   variable: ASApeople
+   is: 'Other Family Member'
+ - Write about any other important people here: 
+   input type: area
+   show if: 
+   variable: ASApeople
+   is: 'Other' 
+---    
+question: Write about yourself. 
+subquestion: | 
+  What would you like us to know about you? Write about what makes you happy. Write about what is important to you. 
+fields: 
+  - no label: ASAimportant
+    input type: area
+--- 
+question: Write about your home. Write about who you live with. 
+subquestion: |
+  Write about what you like about your home. Write about what you don't like about your home. Write about what could be better in your home to make your life easier. Write about the people you live with. They might be the important people you already wrote about or someone else. 
+fields: 
+  - no label: ASAhome
+    input type: area
+---
+question: Write about what you do each day. 
+fields: 
+  - Monday: # don't know if could really work list collect into this- similar problem to the 'important people' bit- run through the alternate one for that with mark 
+--- 
+question: Write about what you like to do. 
+fields: 
+  - no label: ASAlikes
+    input type: area
+    datatype: text
+--- 
+question: Write about your job. 
+subquestion: |
+  If you do not have a job do not write anything. 
+field: 
+  - no label: ASAjob
+    input type: area
+    datatype: text
+    required: false
+---
+question: Write about what you do for fun outside your home. Write about what you do in the community. 
+subquestion: |
+  For example, write about if you like to go walking or to the shops. Write about if you go to church. 
+# Again here, want the list like from what Slack told me- but to have the first one be a drop down choice, and then write about that. Not typing in the first one. 
+---
+question: Write about what other government supports or services you use. Write about when you use them. 
+# As above, having a drop down box listicle would be the best option if it i possible. Eg. drop down box with Inclusive SA, Disability SA, SACARE, other local council inititiatives etc. Ensure with all these questions that you keep your mind with the 'reasonable and necessary' tribunal decisions. Ability to guide questions to hopefully fulfill that expectation. 
+---
+question: Write about what you do each week. 
+#Is there any way to condense this in with the question about what you do every day? Seems like a bit of a null question. 
+---
+question: Write about what you do sometimes.
+subquestion: |
+  This could be things like going to the hairdresser or to visit a friend who lives far away. These are not things you do every week.
+fields: 
+  -no label: ASAsometimes
+   input type: area 
+   data type: text
+--- 
