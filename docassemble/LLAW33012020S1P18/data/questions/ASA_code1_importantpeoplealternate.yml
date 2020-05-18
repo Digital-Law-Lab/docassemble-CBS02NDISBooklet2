@@ -1,0 +1,11 @@
+---
+question: Write about important people in your life who do not work in disability services. For example, write about your family and friends. 
+fields: 
+  - Important person: ASAperon (compare this to the actual list collect link) 
+    choices: 
+    - Mother
+    - Father  
+    - etc. 
+  - Write about them here: person[i].importance
+    input type: area 
+list collect: True 
