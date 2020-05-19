@@ -9,7 +9,7 @@ question: |
 subquestion: |
   This program will help you get ready for your NDIS planning meeting. 
 
-  *This application is only for use by people with intellectual disabilities. 
+  *This application is only for use by people with intellectual disabilities.* 
   
   **You should have a support worker with you while using this program. If you are under 18 you must have a support worker or family member with you.**
   
@@ -39,7 +39,7 @@ code: |
     endpoint['ineligible'] 
 ---
 # This question block asks the questions to drive the code block above
-question: Has the NDIS granted you access to the Scheme as someone with an intellectual disability or learning difficulty?  
+question: Has the NDIS granted you access to the Scheme as someone with an intellectual disability or developmental delay?  
 fields: 
   - no label: ASAaccess
     choices: 
@@ -54,6 +54,7 @@ subquestion: |
 buttons: 
   - Exit: exit
   - Restart: restart
+    url: https://communitybridgingservices.org.au/
 ---
 # This is the eligible endpoint
 event: endpoint['eligible']
@@ -111,9 +112,8 @@ subquestion: |
 fields: 
   - no label: ASAdisability 
     input type: area
-term: 
-  developmental delay: | 
-    Developmental delay means a person finds it hard to do everyday things. For example, have a conversation
+terms: 
+  developmental delay: Developmental delay means a person finds it hard to do everyday things. For example, have a conversation
 ---
 objects:
   - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -172,7 +172,7 @@ fields:
 --- 
 question: Write about your home. Write about who you live with. 
 subquestion: |
-  Write about what you like about your home. Write about what you don't like about your home. Write about what could be better in your home to make your life easier. Write about the people you live with. They might be the important people you already wrote about or someone else. 
+  Write about what you like about your home.  Write about what could be better in your home to make your life easier. Write about the people you live with. 
 fields: 
   - no label: ASAhome
     input type: area
