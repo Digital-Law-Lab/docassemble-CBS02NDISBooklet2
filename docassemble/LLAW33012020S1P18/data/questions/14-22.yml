@@ -1,0 +1,97 @@
+---
+Mandatory: True
+question: Welcome to Part 2
+subquestion: |
+  
+  ### Part 2 focuses on your goals
+  
+  Would you like to continue?
+buttons:
+  - "Continue": continue
+  - "Exit": exit
+---
+question: 1. What are some fun activities that you like to do? 
+under: |
+  Note: these are things that enjoy doing in your free time.
+fields:
+  - Favourite activity: favourite_activity
+ 
+help: |
+  Hint: these are things you like to do in your free time. For example, swimming, shopping, cooking, walking your pet.
+  
+continue button label: next 
+Mandatory: True
+--- 
+question: 2. Are you a part of any groups? 
+under: |
+  Note: for example; a choir, a church group, an arts and crafts group, drama group.
+fields:
+  - Group: group_member
+ 
+help: |
+  Hint: these are groups that you join to do a specific activity with other people.
+  
+continue button label: next 
+Mandatory: True
+--- 
+question: 3. What are you able to do in your life now that you enjoy doing? 
+under: |
+  Note: for example, garden or look after plants, cook, look after your pet, knit. 
+fields:
+ activities I can do alone and enjoy doing: individual_activity
+ 
+help: |
+  Hint: these can be things like bathing without help or catching public transport alone.
+  
+continue button label: next 
+Mandatory: True
+
+--- 
+question: 4.What are you not able to do that you would like to start to learn to do or be able to do on your own? 
+under: |
+  Note: for example, you would like to be able to cook for yourself or catch public transport on your own. 
+fields:
+ things I can not do alone and would like to learn to do alone: learn_activity
+ 
+help: |
+  Hint: for example: someone may help you dress every morningbut you would like to start doing that alone. 
+  
+continue button label: next 
+Mandatory: True
+--- 
+question: 5. Write 2 short term goals that you would like to achieve
+under: |
+  Note: A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. 
+fields:
+ my 2 short term goals (you can put as much detail in your goal as you like):  shortterm_goals
+ 
+help: |
+  Hint: When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  
+  * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much?;
+  * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday. 
+  
+continue button label: next 
+Mandatory: True
+--- 
+question: 5. Write 2 long term goals that you would like to achieve
+under: |
+  Note: Long term goals can be goals that you would like to reach in a few years. These goals are goals that need e.g. specific skills that you need to attain over time e.g. getting a job. Use the SMART goal guide (press help) to make these goals. 
+fields:
+ my 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
+ 
+help: |
+  Hint: When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  
+  * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much?;
+  * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday. 
+  
+continue button label: next 
+Mandatory: True
+---
