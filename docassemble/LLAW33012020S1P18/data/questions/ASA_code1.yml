@@ -33,7 +33,7 @@ buttons:
 # This code block drives the interview. Initial requirements. 
 mandatory: True 
 code: | 
-  if ASAvalidity_ok == True: 
+  if ASAaccess == 'Yes': 
     endpoint['eligible']
   else: 
     endpoint['ineligible'] 
@@ -41,17 +41,10 @@ code: |
 # This question block asks the questions to drive the code block above
 question: Has the NDIS granted you access to the Scheme as someone with an intellectual disability or learning difficulty?  
 fields: 
-  - no label: ASAeligiblity
+  - no label: ASAaccess
     choices: 
       - Yes
       - No
----
-#This code block works out ASAeligibility_ok
-code: | 
-  if ASAeligibility == 'Yes': 
-    ASAeligibility_ok = True   
-  else: 
-    ASAeligibility_ok = False  
 --- 
 # This is ineligible endpoint
 event: endpoint['ineligible']
@@ -72,20 +65,24 @@ subquestion: |
 
   Information|Your Input
   -----------|----------
-  Name               | ${ ASAfirstname } ${ ASAlatname } 
+  Name               | ${ ASAfirstname } ${ ASAlastname }     
   NDIS number        | ${ ASAndisnumber } 
+  Granted Access     | ${ ASAaccess} 
   Age                | ${ ASAage } 
   Disability Impact  | ${ ASAdisability }  
-  Important People   | ${ ASAperon } 
-  
- 
- # Rest of data will be entered here... 
+  Important People   | ${ impt_people_table } 
+  About You          | ${ ASAimportant }
+  Your Home          | ${ ASAhome } 
+  Daily Tasks        | ${ ASAdaily } 
+  Likes              | ${ ASAlikes } 
+  Job                | ${ ASAjob } 
+  Community          | ${ com_involvement_table }
+  Supports           | ${ govt_support_table }
+  Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday } ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
+  Sometimes          | ${ ASAsometimes } 
   
     **This document was filed on ${ today() }** 
-attachment: 
-  docx template file: Booklet_2.docx
-  valid formats: 
-    - pdf
+    
 buttons:
   - Edit: restart
   - Done: exit
@@ -113,59 +110,59 @@ subquestion: |
   Also write about how your disability or developmental delay affects your life. 
 fields: 
   - no label: ASAdisability 
-    datatype: text
+    input type: area
 term: 
   developmental delay: | 
     Developmental delay means a person finds it hard to do everyday things. For example, have a conversation
---- 
-question: Write about important people in your life who do not work in disability services. For example, write about your family and friends. 
-fields:
-  - Pick the people who are close to you: ASApeople
-    datatype: checkboxes
+---
+objects:
+  - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  important_people.appendObject()
+  important_people.appendObject()
+---
+question: Write about important people in your life who do not work in disability services. Write about what they do with you. For example, write about your family and friends. 
+fields: 
+  - Important person: important_people[i].name.text 
     choices: 
     - Mother
-    - Father
-    - Sister
+    - Father  
     - Brother
+    - Sister
     - Friend
     - Other Family Member
-    - Other (for example, boss) 
-  - Write about your mother here: ASAmother
+    - Other Person 
+    required: false
+  - Write about them here: important_people[i].info
     input type: area
-    show if: 
-    variable: ASApeople
-    is: 'Mother' 
-  - Write about your father here: ASAfather
-    input type: area
-    show if: 
-    variable: ASApeople
-    is: 'Father' 
-  - Write about your brother here: ASAbrother
-    input type: area
-    show if: 
-    variable: ASApeople
-    is: 'Brother' 
-  - Write about your sister here: ASAsister
-    input type: area
-    show if: 
-    variable: ASApeople
-    is: 'Sister' 
-  - Write about your friend here: ASAfriend
-    input type: area
-    show if: 
-    variable: ASApeople
-    is: 'Friend' 
- - Write about your other family member here: ASAotherfamily
-   input type: area
-   show if: 
-   variable: ASApeople
-   is: 'Other Family Member'
- - Write about any other important people here: 
-   input type: area
-   show if: 
-   variable: ASApeople
-   is: 'Other' 
----    
+    required: false
+list collect:
+  enable: not important_people.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about an important person
+---
+question: Do you want to add any more people?
+yesno: important_people.there_is_another
+---
+table: impt_people_table
+rows: important_people
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ impt_people_table }
+  
+  ${ important_people.add_action() }
+---  
 question: Write about yourself. 
 subquestion: | 
   What would you like us to know about you? Write about what makes you happy. Write about what is important to you. 
@@ -180,9 +177,10 @@ fields:
   - no label: ASAhome
     input type: area
 ---
-question: Write about what you do each day. 
+question: Write about what you do each day. Write about what you enjoy doing. 
 fields: 
-  - Monday: # don't know if could really work list collect into this- similar problem to the 'important people' bit- run through the alternate one for that with mark 
+  - no label: ASAdaily
+    input type: area
 --- 
 question: Write about what you like to do. 
 fields: 
@@ -193,28 +191,130 @@ fields:
 question: Write about your job. 
 subquestion: |
   If you do not have a job do not write anything. 
-field: 
+fields: 
   - no label: ASAjob
     input type: area
     datatype: text
-    required: false
+---
+objects:
+  - community_involvement: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  community_involvement.appendObject()
+  community_involvement.appendObject()
 ---
 question: Write about what you do for fun outside your home. Write about what you do in the community. 
+fields: 
+  - Community Activity: community_involvement[i].name.text 
+    choices: 
+    - Exercise and Sports
+    - Volunteering  
+    - Church
+    - Public Transport 
+    - Visiting Parks and Beaches
+    - Library
+    - Going to the Movies 
+    - Classes
+    - Other Activities
+    required: false
+  - Write about it here: community_involvement[i].info
+    input type: area
+    required: false
+list collect:
+  enable: not community_involvement.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about what you do for fun and your community involvement
+---
+question: Do you want to add any more activities?
+yesno: community_involvement.there_is_another
+---
+table: com_involvement_table
+rows: community_involvement
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
 subquestion: |
-  For example, write about if you like to go walking or to the shops. Write about if you go to church. 
-# Again here, want the list like from what Slack told me- but to have the first one be a drop down choice, and then write about that. Not typing in the first one. 
+  ${ com_involvement_table }
+  
+  ${ community_involvement.add_action() }
+---
+objects:
+  - government_support: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  government_support.appendObject()
+  government_support.appendObject()
 ---
 question: Write about what other government supports or services you use. Write about when you use them. 
-# As above, having a drop down box listicle would be the best option if it i possible. Eg. drop down box with Inclusive SA, Disability SA, SACARE, other local council inititiatives etc. Ensure with all these questions that you keep your mind with the 'reasonable and necessary' tribunal decisions. Ability to guide questions to hopefully fulfill that expectation. 
+fields: 
+  - Government service: government_support[i].name.text 
+    choices: 
+    - School
+    - University  
+    - TAFE
+    - Public Transport
+    - Public Doctor 
+    - Library
+    - Other services, including local council services
+    required: false
+  - Write about it here: government_support[i].info
+    input type: area
+    required: false
+list collect:
+  enable: not government_support.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about a government service you use 
 ---
-question: Write about what you do each week. 
-#Is there any way to condense this in with the question about what you do every day? Seems like a bit of a null question. 
+question: Do you want to add any more?
+yesno: government_support.there_is_another
+---
+table: govt_support_table
+rows: government_support
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ govt_support_table }
+  
+  ${ government_support.add_action() }
+---
+question: Write about what you do each week. Write about what supports you use to do these things. 
+fields: 
+  - Monday: ASAMonday
+    input type: area 
+  - Tuesday: ASATuesday
+    input type: area
+  - Wednesday: ASAWednesday
+    input type: area
+  - Thursday: ASAThursday
+    input type: area
+  - Friday: ASAFriday
+    input type: area
+  - Saturday: ASASaturday
+    input type: area
+  - Sunday: ASASunday
+    input type: area
 ---
 question: Write about what you do sometimes.
 subquestion: |
   This could be things like going to the hairdresser or to visit a friend who lives far away. These are not things you do every week.
 fields: 
-  -no label: ASAsometimes
-   input type: area 
-   data type: text
+  - no label: ASAsometimes
+    input type: area  
 --- 

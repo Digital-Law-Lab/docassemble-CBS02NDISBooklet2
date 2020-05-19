@@ -1,11 +1,45 @@
 ---
+objects:
+  - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  important_people.appendObject()
+  important_people.appendObject()
+---
 question: Write about important people in your life who do not work in disability services. For example, write about your family and friends. 
 fields: 
-  - Important person: ASAperon (compare this to the actual list collect link) 
+  - Important person: important_people[i].name.text 
     choices: 
     - Mother
     - Father  
     - etc. 
-  - Write about them here: person[i].importance
-    input type: area 
-list collect: True 
+    required: false
+  - Write about them here: important_people[i].info
+    input type: area
+    required: false
+list collect:
+  enable: not important_people.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about an important person
+---
+question: Do you want to add any more people?
+yesno: important_people.there_is_another
+---
+table: impt_people_table
+rows: important_people
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ impt_people_table }
+  
+  ${ important_people.add_action() }
+---
