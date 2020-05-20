@@ -7,8 +7,9 @@ subquestion: |
   
   Would you like to continue?
 buttons:
-  - "Continue": continue
-  - "Exit": exit
+  - Continue: continue
+  - Exit: exit
+    url: https://communitybridgingservices.org.au/
 ---
 question: 1. What are some fun activities that you like to do? 
 under: |
