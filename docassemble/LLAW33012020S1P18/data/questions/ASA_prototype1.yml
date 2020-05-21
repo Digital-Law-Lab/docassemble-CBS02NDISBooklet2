@@ -107,7 +107,7 @@ subquestion: |
   Meeting Companion  | ${ STbring } 
   
   
-    **This document was filed on ${ today() }** 
+    **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
 
 attachment: 
   docx template file: Booklet_2_FOR_S1.docx
