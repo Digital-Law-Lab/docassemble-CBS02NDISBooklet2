@@ -82,10 +82,9 @@ subquestion: |
 
   **Question** | **Your Answer**
   -------------|----------------
+  Granted Access     | ${ ASAaccess } 
   Name               | ${ ASAfirstname } ${ ASAlastname }     
   NDIS number        | ${ ASAndisnumber } 
-  Granted Access     | ${ ASAaccess } 
-  Plan Supervisor    | ${ STplan } 
   Age                | ${ ASAage } 
   Disability Impact  | ${ ASAdisability }  
   About You          | ${ ASAimportant }
@@ -104,6 +103,7 @@ subquestion: |
   Current Help       | ${ STcurrenthelp } 
   Further Help       | ${ STmorehelp }
   Other Information  | ${ STotherpersoninfo } 
+  Plan Supervisor    | ${ STplan }
   Meeting Companion  | ${ STbring } 
   
   
