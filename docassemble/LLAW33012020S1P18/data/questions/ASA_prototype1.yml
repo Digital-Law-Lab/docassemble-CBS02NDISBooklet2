@@ -7,7 +7,7 @@ mandatory: True
 question: |
   Preparing for your NDIS planning meeting with CBS Inc. 
 subquestion: |
-  This program will help you get ready for your NDIS planning meeting. 
+  This program can help you get ready for your NDIS planning meeting. 
 
   *This application is only for use by people with intellectual disabilities.* 
   
@@ -17,14 +17,16 @@ subquestion: |
   
   This program is **not** legal advice. 
   
-  Answer all questions honestly. 
+  Answer all questions honestly. This is important. 
   
-  This program does not guarantee that you will receive funding from NDIS. It will help you prepare for the planning meeting. 
+  This program has some hard words. Hard words will be green. If you put your mouse on the green word it will be explained. Ask a friend or family member if you need more help. 
+  
+  This program does not guarantee that you will receive funding from NDIS. It can help you prepare for your planning meeting. 
   
   **The NDIA will make the final decision.**
   
   Do you agree to these terms? 
-
+  
 buttons:
   -  Yes: continue
   -  No: exit
@@ -39,12 +41,16 @@ code: |
     endpoint['ineligible'] 
 ---
 # This question block asks the questions to drive the code block above
-question: Has the NDIS granted you access to the Scheme as someone with an intellectual disability or developmental delay?  
+question: Have you been granted access to the NDIS as someone with an intellectual disability or {developmental delay}?  
 fields: 
   - no label: ASAaccess
     choices: 
       - Yes
       - No
+under: | 
+If you have been told to fill in this application then you have been granted access. 
+terms: 
+  developmental delay: Developmental delay means a person finds it hard to do everyday things. For example, have a conversation.
 --- 
 # This is ineligible endpoint
 event: endpoint['ineligible']
@@ -62,23 +68,21 @@ question: COMPLETED
 subquestion: |
  **Please read this infomation carefully:**
   
-  Your Local Area Coordinator (LAC) or Early Childhood Early Intervention Coordinator (ECEI) will now:
+  Your Local Area Coordinator (LAC) will organise a meeting time and will contact you about it. 
   
-  -	Make a meeting time for you 
-  
-  -	Tell you when and where the meeting will be
+  There is a pdf document available for you to download or email to yourself at the very bottom of the page. It is below the table that shows the answers you gave today. Scroll down to find it. 
 
   **Remember to bring these things to your meeting:**
   
-  - The document at the bottom of the screen (it has all the answers you wrote today in it)
+  - The pdf document at the very bottom of this page 
   
-  -	Your bank account information
+  -	Your bank account information. This means you must bring your account name, account number and BSB. 
   
-  -	Your MyGov account Information 
+  -	Your MyGov account information 
 
-  *Ask your LAC or ECEI Coordinator to help you!*
+  *Ask your Local Area Coordinator or a family member to help you!*
 
-  ###Below is a table containing the interview questions and your responses###
+  **Below is a table containing the interview questions and your responses.**
 
   **Question** | **Your Answer**
   -------------|----------------
@@ -110,7 +114,7 @@ subquestion: |
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
 
 attachment: 
-  docx template file: Booklet_2_FOR_S1.docx
+  docx template file: Jinja_Populated_Document_1_JUNE.docx
   valid formats: 
     - pdf
 buttons:
@@ -129,20 +133,22 @@ question: Write your NDIS number.
 fields: 
   - no label: ASAndisnumber
     datatype: integer
+under: |
+  You can find your NDIS number on your Access Request Form or on myGov. It will be made up of 9 numbers. 
 --- 
 question: Write how old you are.  
 fields: 
   - no label: ASAage
     datatype: integer
 ---
-question: Write about your disability or {developmental delay}. 
+question: Write about your disability or developmental delay. Write about how it effects your life. 
 subquestion: | 
-  Also write about how your disability or developmental delay affects your life. 
+  Developlmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
 fields: 
   - no label: ASAdisability 
     input type: area
-terms: 
-  developmental delay: Developmental delay means a person finds it hard to do everyday things. For example, have a conversation
+under: |
+Be honest. If your disability effects your life alot then write about that. You do not need to pretend that things are good if they are not. 
 ---
 objects:
   - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -194,14 +200,14 @@ subquestion: |
 ---  
 question: Write about yourself. 
 subquestion: | 
-  What would you like us to know about you? Write about what makes you happy. Write about what is important to you. 
+  What would you like us to know about you? Write about what makes you happy. Write about what is important to you. If you find it hard to do things that make you happy write about that too. Be honest. 
 fields: 
   - no label: ASAimportant
     input type: area
 --- 
 question: Write about your home. Write about who you live with. 
 subquestion: |
-  Write about what you like about your home.  Write about what could be better in your home to make your life easier. Write about the people you live with. 
+  Write about the people you live with. Write about what you like about your home. Write about what could make living in your home better. For example, having someone help you clean or do the gardening, or having a ramp installed. Write about anything that would make your home life easier. 
 fields: 
   - no label: ASAhome
     input type: area
@@ -224,6 +230,7 @@ fields:
   - no label: ASAjob
     input type: area
     datatype: text
+    required: false
 ---
 objects:
   - community_involvement: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -324,6 +331,8 @@ subquestion: |
   ${ government_support.add_action() }
 ---
 question: Write about what you do each week. Write about what supports you use to do these things. 
+subquestion: |
+  Supports can include things like needing a carer or family member to take you places, a walking frame, or a support animal. Write about anything that helps you do your daily tasks. 
 fields: 
   - Monday: ASAMonday
     input type: area 
@@ -498,7 +507,7 @@ under: |
 
   -	A Local Area Coordinator (LAC) 
   
-  -	Your Early Childhood Early Intervention (ECEI) Coordinator
-  
   -	An NDIA planner
+  
+  The document given to you at the end of this interview will give you more information on this. 
 ---
