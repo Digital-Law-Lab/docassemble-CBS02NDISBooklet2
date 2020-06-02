@@ -166,9 +166,9 @@ fields:
     - Father  
     - Brother
     - Sister
-    - Friend
+    - Friend  
     - Other Family Member
-    - Other Person 
+    - Other Important Person 
     required: false
   - Write about them here: important_people[i].info
     input type: area
