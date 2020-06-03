@@ -98,17 +98,18 @@ subquestion: |
   Job                | ${ ASAjob } 
   Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday }                      | ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
   Sometimes          | ${ ASAsometimes } 
-  Activities         | ${ favourite_activity } 
-  Group Membership   | ${ group_member } 
-  Enjoyable Tasks    | ${ individual_activity } 
-  New Tasks          | ${ learn_activity } 
-  Short Term Goals   | ${ shortterm_goals } 
-  Long Term Goals    | ${ longterm_goals } 
-  Current Help       | ${ STcurrenthelp } 
-  Further Help       | ${ STmorehelp }
-  Other Information  | ${ STotherpersoninfo } 
-  Plan Supervisor    | ${ STplan }
-  Meeting Companion  | ${ STbring } 
+  Activities         | ${ ASAfavourite_activity } 
+  Group Membership   | ${ ASAgroup_member } 
+  Enjoyable Tasks    | ${ ASAindividual_activity } 
+  New Tasks          | ${ ASAlearn_activity } 
+  Short Term Goals   | ${ ASAshortterm_goals } 
+  Long Term Goals    | ${ ASAlongterm_goals } 
+  Current Help       | ${ ASAcurrenthelp } 
+  Further Help       | ${ ASAmorehelp }
+  Other Information  | ${ ASAotherpersoninfo } 
+  Plan Supervisor    | ${ ASAplan }
+  Meeting Companion  | ${ ASAbring } 
+
   
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
@@ -148,7 +149,7 @@ fields:
   - no label: ASAdisability 
     input type: area
 under: |
-Be honest. If your disability effects your life alot then write about that. You do not need to pretend that things are good if they are not. 
+Be honest and tell the truth. If your disability effects your life a little or a lot, it is ok to write that.  
 ---
 objects:
   - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -360,10 +361,10 @@ question: What are some fun activities that you like to do?
 subquestion: |
    These are things that enjoy doing in your free time. For example, swimming, shopping, cooking, walking your pet.
 fields:
-  - Favourite activity: favourite_activity
+  - Favourite activity: ASAfavourite_activity
     input type: area 
   
-continue button label: continue
+
 Mandatory: True
 --- 
 question: Are you a part of any groups? 
@@ -371,43 +372,43 @@ under: |
 subquestion: |
  For example; a choir, a church group, an arts and crafts group, drama group or   a volunteer team. 
 fields:
-  - Group: group_member
+  - Group: ASAgroup_member
     input type: area 
  
 help: |
   These are groups that you join to do a specific activity with other people to achieve a specific goal or for fun. These groups can be formal groups which are task based e.g. a poltical group. These groups can also be informal meaning they are groups which are created usually with friends to do common activities between members e.g. a prayer group.
   
-continue button label: continue 
+
 Mandatory: True
 --- 
 question: What are you able to do in your life now that you enjoy doing? 
 subquestion: | 
   For example, garden or look after plants, cook, look after your pet, knit. 
 fields:
- activities I can do alone and enjoy doing: individual_activity
+ activities I can do alone and enjoy doing: ASAindividual_activity
  input type: area 
  
 help: |
  These can be simple everyday things like bathing without help. They can also be more complex things such as managing your own finances.  
-  
-continue button label: continue 
+   
+
 Mandatory: True
 --- 
 question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
 subquestion: |
   For example, you would like to be able to cook for yourself or catch public transport on your own. 
 fields:
- things I can not do alone and would like to learn to do alone: learn_activity
+ Things I can not do alone and would like to learn to do alone: ASAlearn_activity
  input type: area
-  
-continue button label: Continue 
+   
+
 Mandatory: True
 --- 
 question: Write 2 short term goals that you would like to achieve
 subquestion: |
   Note: A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. 
 fields:
- my 2 short term goals (you can put as much detail in your goal as you like):  shortterm_goals
+ My 2 short term goals (you can put as much detail in your goal as you like):  ASAshortterm_goals
  input type: area 
  
 help: |
@@ -418,15 +419,14 @@ help: |
   * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
   * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
   * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday. 
-  
-continue button label: continue 
+
 Mandatory: True
 --- 
 question: Write 2 long term goals that you would like to achieve
 Subquestion: |
   Note: Long term goals can be goals that you would like to reach in a few years. These goals are goals that need e.g. specific skills that you need to attain over time e.g. getting a job. Use the SMART goal guide (press help) to make these goals. 
 fields:
- my 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
+ My 2 long term goals (you can put as much detail in your goal as you like).:  ASAlongterm_goals
  input type: area 
  
 help: |
@@ -438,12 +438,12 @@ help: |
   * Relevant (reasonable, realistic and resourced, results-based). This means that the goal is something that can be added into your life without causing any         problems; and
   * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be reached e.g. in two years. 
   
-continue button label: continue 
+
 Mandatory: True
 ---
 question: What kind of help do you get already and want to keep?
 fields:
-  - List the people that help you each day and what they help you do: STcurrenthelp
+  - List the people that help you each day and what they help you do: ASAcurrenthelp
     input type: area
 subquestion: |
   For Example: Do you have someone who...
@@ -458,21 +458,21 @@ subquestion: |
 ---
 question: Is there anything else you need help with?
 fields:
-  - Write other things you need help doing but dont have someone to help you do them: STmorehelp
+  - Write other things you need help doing but dont have someone to help you do them: ASAmorehelp
     input type: area
 subquestion: |
   For Example: Do you want to visit friends but do not have someone to come with you?
 ---
 question: Is there any other information you want the NDIS to know about you?
 fields:
-  - List things you find hard to do each day or new things you want to do but haven't told us about yet: STotherpersoninfo
+  - List things you find hard to do each day or new things you want to do but haven't told us about yet: ASAotherpersoninfo
     input type: area
 under: |
   For Example: Is it hard for you to get dressed but you haven’t told us about it yet?
 ---
 question: You can bring someone along with you to your meeting for help.
 fields:
-  - Who would you like to bring?: STbring
+  - Who would you like to bring?: ASAbring
     datatype: target_variable
     choices:
     - Mum
@@ -487,7 +487,7 @@ fields:
 ---
 question: The NDIS will give you money to pay for the things you need help with. This is called *your plan.*
 fields:
-  - Who would you like to be in charge of your plan?: STplan
+  - Who would you like to be in charge of your plan?: ASAplan
     datatype: target_variable
     choices:
     - I dont know yet
