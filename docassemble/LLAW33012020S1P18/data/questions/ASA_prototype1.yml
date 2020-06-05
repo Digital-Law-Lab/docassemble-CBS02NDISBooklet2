@@ -156,7 +156,13 @@ subquestion: |
   %for item in government_support:
   ${item.name}       | ${item.info}
   %endfor
-  Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday }        | ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
+  Monday Tasks        | ${ ASAMonday }, ${ ASAMondaysup }
+  Tuesday Tasks       | ${ ASATuesday }, ${ ASATuesdaysup} 
+  Wednesday Tasks     | ${ ASAWednesday }, ${ ASAWednesdaysup }
+  Thursday Tasks      | ${ ASAThursday }, ${ ASAThursdaysup } 
+  Friday Tasks        | ${ ASAFriday }, ${ ASAFridaysup } 
+  Saturday Tasks      | ${ ASASaturday }, ${ ASASaturdaysup } 
+  Sunday Tasks        | ${ ASASunday }, ${ ASASundaysup } 
   Sometimes          | ${ ASAsometimes } 
   Activities         | ${ favourite_activity } 
   Group Membership   | ${ group_member } 
@@ -174,7 +180,7 @@ subquestion: |
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
 attachment: 
-  docx template file: JINJA_FINAL_5_JUNE.docx
+  docx template file: JINJA_FINAL_6_JUNE.docx
   valid formats: 
     - pdf
 buttons:
@@ -199,12 +205,15 @@ fields:
   - no label: ASAage
     datatype: integer
 ---
+decoration: numbergraphic.png
 question: Write your NDIS number. 
 fields: 
   - no label: ASAndisnumber
     datatype: integer
 under: |
-  You can find your NDIS number on your Access Request Form or on myGov. It will be 9 numbers and look something like this: 123 456 789. 
+  You can find your NDIS number on myplace through myGov. It will be 9 numbers and look something like this: 123 456 789. This picture shows you were to find it on myplace. 
+  
+          [FILE numbergraphic.png] 
 ---
 question: Write about yourself. 
 subquestion: | 
@@ -217,18 +226,19 @@ Section: Your Details
 --- 
 question: Write about your disability or developmental delay. Write about how it effects your life. 
 subquestion: | 
-  Developlmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
+  Developmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
 fields: 
   - no label: ASAdisability 
     input type: area
 under: |
-  Be honest and tell the truth. There is no wrong answer. If your disability effects your life a lot, it is ok to write that.   
+  There is no wrong answer. If your disability affects your life a lot, it is ok to write that. Be honest and tell the truth. 
 
 section: Your Disability
 ---
 question: Write about your home. Write about who you live with. 
 subquestion: |
-  Write about the people you live with. Write about what you like about your home. Write about what could make living in your home easier. For example, having someone help you clean or do the gardening, or having a ramp installed. 
+  Write about the people you live with and what you like about your home.       Write about what you like about your home. 
+  Write about what could make living in your home easier. For example, having someone help you clean or do the gardening, or having a ramp installed. 
 fields: 
   - no label: ASAhome
     input type: area
@@ -273,13 +283,13 @@ fields:
 ---
 question: What are you able to do in your life now that you enjoy doing? 
 subquestion: | 
-  For example: gardening, cooking, looking after your pet, knitting. 
+  This could be things like gardening, cooking, looking after your pet, knitting. 
 fields:
  no label: individual_activity
  input type: area 
  
 under: |
- These can be simple everyday things like bathing without help. They can also be more complex things such as managing your own finances. 
+ These can be simple everyday things like bathing without help. They can also be more complex things such as being in charge of your own money. 
 --- 
 objects:
   - community_involvement: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -337,7 +347,7 @@ subquestion: |
 question: Are you a part of any groups? 
 under: |
 subquestion: |
- For example; a choir, a church group, an arts and crafts group, drama group or   a volunteer team. 
+ This could be things like being part of a choir, a church group, an arts and crafts group, drama group or a volunteer team. 
 fields:
   - no label: group_member
     input type: area 
@@ -433,19 +443,33 @@ question: Write about what you do each week. Write about what supports you use t
 subquestion: |
   Supports can include things like needing a carer or family member to take you places, a walking frame, or a support animal. Write about anything that helps you do your daily tasks. 
 fields: 
-  - Monday: ASAMonday
+  - What I do on MONDAYS: ASAMonday
     input type: area 
-  - Tuesday: ASATuesday
+  - Supports: ASAMondaysup
+    input type: area 
+  - What I do on TUESDAYS: ASATuesday
     input type: area
-  - Wednesday: ASAWednesday
+  - Supports: ASATuesdaysup
     input type: area
-  - Thursday: ASAThursday
+  - What I do on WEDNESDAYS: ASAWednesday
     input type: area
-  - Friday: ASAFriday
+  - Supports: ASAWednesdaysup
     input type: area
-  - Saturday: ASASaturday
+  - What I do on THURSDAYS: ASAThursday
     input type: area
-  - Sunday: ASASunday
+  - Supports: ASAThursdaysup
+    input type: area
+  - What I do on FRIDAYS: ASAFriday
+    input type: area
+  - Supports: ASAFridaysup
+    input type: area
+  - What I do on SATURDAYS: ASASaturday
+    input type: area
+  - Supports: ASASaturdaysup
+    input type: area
+  - What I do on SUNDAYS: ASASunday
+    input type: area
+  - Supports: ASASundaysup
     input type: area
 
 section: Support You Use
