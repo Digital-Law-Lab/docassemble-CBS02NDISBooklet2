@@ -2,10 +2,17 @@
 objects: 
   - endpoint: DADict
 ---
+Features:
+  css: nav_bar.css
+
+---
 # This is the welcome screen!!
 mandatory: True
 question: |
+ <span class="ASAheader">
   Preparing for your NDIS planning meeting with CBS Inc. 
+  </span>
+  
 subquestion: |
   This program can help you get ready for your NDIS planning meeting. 
 
@@ -13,9 +20,13 @@ subquestion: |
   
   **You should have a support worker with you while using this program. If you are under 18 you must have a support worker or family member with you.**
   
+  <span class="ASAdisclaimerheading">
   ***Disclaimer***
+  </span>
   
+  <span class="ASAdisclaimer">
   This program does **not** give legal advice. The information in the booklet is not intended to be a subsitute for legal advice and should not be relied upon as legal advice. Appropriate legal advice should be sought in relation to any matters you may have. 
+  </span>
   
   Answer all questions honestly. This is important. 
   
@@ -71,7 +82,6 @@ subquestion: |
   Your Local Area Coordinator (LAC) should be in touch to organise a meeting time and will contact you about it. 
   
   There is a pdf document available for you to download or email to yourself at the very bottom of the page. It is below the table that shows the answers you gave today. Scroll down to the end (past the table below) of the page to find it. 
-
   **Remember to bring these things to your meeting:**
   
   - The pdf document at the very bottom of this page.
@@ -79,11 +89,8 @@ subquestion: |
   -	Your bank account information. This means you must bring your account name, account number and BSB. 
   
   -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
-
   *Ask your Local Area Coordinator or a family member to help you!*
-
   **Below is a table containing the interview questions and your responses.**
-
   **Question** | **Your Answer**
   -------------|----------------
   Granted Access     | ${ ASAaccess } 
@@ -109,11 +116,9 @@ subquestion: |
   Other Information  | ${ STotherpersoninfo } 
   Plan Supervisor    | ${ STplan }
   Meeting Companion  | ${ STbring } 
-
   
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
-
 attachment: 
   docx template file: Jinja_4_JUNE.docx
   valid formats: 
@@ -361,7 +366,7 @@ question: What are some fun activities that you like to do?
 subquestion: |
    These are things that enjoy doing in your free time. For example, swimming, shopping, cooking, walking your pet.
 fields:
-  - Favourite activity: favourite_activity
+  - favourite activity: favourite_activity
     input type: area 
 --- 
 question: Are you a part of any groups? 
@@ -482,7 +487,6 @@ under: |
   If no one has talked to you about picking someone to be in charge of your plan...select **I dont know yet**
   
   Ask these people to help you pick who you want in charge of *your plan*:
-
   -	A Local Area Coordinator (LAC) 
   
   -	An NDIA planner
