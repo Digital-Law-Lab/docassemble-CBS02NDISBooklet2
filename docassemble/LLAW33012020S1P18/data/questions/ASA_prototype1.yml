@@ -20,19 +20,28 @@ subquestion: |
   
   **You should have a support worker with you while using this program.** ***If you are under 18 you must have a support worker or family member with you.***
   
+   This program has some hard words. Hard words will be green. If you click your mouse on the green word it will be explained. Ask a friend or family member if you need more help. 
+   
+   Answer all questions honestly. This is important. 
+   
+   Are you ready to start? If you need more help press 'NO' and talk to a CBS worker or family member before continuing. 
+buttons: 
+  - Yes: continue
+  - No: exit
+    url: https://communitybridgingservices.org.au/
+---
+mandatory: True
+question: |
   <span class="ASAdisclaimerheading">
   ***Disclaimer***
   </span>
   
+subquestion: | 
   <span class="ASAdisclaimer">
   This program does **not** give legal advice. Any information in this applicaiton or the booklet it produces is not intended to be a subsitute for legal advice and should not be relied upon as legal advice. Appropriate legal advice should be sought in relation to any matters you may have. 
   </span>
   
-  Answer all questions honestly. This is important. 
-  
-  This program has some hard words. Hard words will be green. If you put your mouse on the green word it will be explained. Ask a friend or family member if you need more help. 
-  
-  This program does not guarantee that you will receive funding from NDIS. It can help you prepare for your planning meeting. 
+  This program can help you prepare for your planning meeting. It does not guarantee that you will receive funding from NDIS. 
   
   **The NDIA will make the final decision.**
   
@@ -103,10 +112,19 @@ subquestion: |
   Age                | ${ ASAage } 
   Disability Impact  | ${ ASAdisability }  
   About You          | ${ ASAimportant }
+  %for impt_person in important_people:
+  ${impt_person.name}|${impt_person.info}
+  %endfor
   Your Home          | ${ ASAhome } 
   Daily Tasks        | ${ ASAdaily } 
   Likes              | ${ ASAlikes } 
   Job                | ${ ASAjob } 
+  %for item in community_involvement:
+  ${item.name}       | ${item.info}
+  %endfor
+  %for item in government_support:
+  ${item.name}       | ${item.info}
+  %endfor
   Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday }        | ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
   Sometimes          | ${ ASAsometimes } 
   Activities         | ${ favourite_activity } 
@@ -120,9 +138,7 @@ subquestion: |
   Other Information  | ${ STotherpersoninfo } 
   Plan Supervisor    | ${ STplan }
   Meeting Companion  | ${ STbring } 
-  %for impt_person in important_people:
-  ${impt_person.name}|${impt_person.info}
-  %endfor
+  
   
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
@@ -136,6 +152,7 @@ buttons:
     url: https://communitybridgingservices.org.au/
 ---
 question: Write your name.  
+subquestion: Write your own name and not the name of someone who may be helping you. All of the questions will ask for *your* details. You should put your information in as you are the person applying for the plan.  
 fields: 
   - First Name: ASAfirstname
     datatype: text
