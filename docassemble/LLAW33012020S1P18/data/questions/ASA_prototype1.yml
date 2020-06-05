@@ -59,7 +59,7 @@ fields:
       - Yes
       - No
 under: | 
-  If you have been told to fill in this application then you have been granted     access. 
+  If your CBS worker has told you to fill in this application then press 'YES'. 
 terms: 
   developmental delay: Developmental delay means a person finds it hard to do everyday things. For example, have a conversation.
 --- 
@@ -120,7 +120,7 @@ subquestion: |
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
 attachment: 
-  docx template file: Jinja_4_JUNE.docx
+  docx template file: JINJA_FINAL_5_JUNE.docx
   valid formats: 
     - pdf
 buttons:
@@ -140,7 +140,7 @@ fields:
   - no label: ASAndisnumber
     datatype: integer
 under: |
-  You can find your NDIS number on your Access Request Form or on myGov. It will be made up of 9 numbers. 
+  You can find your NDIS number on your Access Request Form or on myGov. It will be 9 numbers and look something like this: 123 456 789. 
 --- 
 question: Write how old you are.  
 fields: 
@@ -154,7 +154,7 @@ fields:
   - no label: ASAdisability 
     input type: area
 under: |
-  Be honest and tell the truth. If your disability effects your life a little or a lot, it is ok to write that.  
+  Be honest and tell the truth. There is no wrong answer. If your disability effects your life a lot, it is ok to write that.   
 ---
 objects:
   - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -213,7 +213,7 @@ fields:
 --- 
 question: Write about your home. Write about who you live with. 
 subquestion: |
-  Write about the people you live with. Write about what you like about your home. Write about what could make living in your home better. For example, having someone help you clean or do the gardening, or having a ramp installed. Write about anything that would make your home life easier. 
+  Write about the people you live with. Write about what you like about your home. Write about what could make living in your home easier. For example, having someone help you clean or do the gardening, or having a ramp installed. 
 fields: 
   - no label: ASAhome
     input type: area
@@ -366,7 +366,7 @@ question: What are some fun activities that you like to do?
 subquestion: |
    These are things that enjoy doing in your free time. For example, swimming, shopping, cooking, walking your pet.
 fields:
-  - favourite activity: favourite_activity
+  - no label: favourite_activity
     input type: area 
 --- 
 question: Are you a part of any groups? 
@@ -374,7 +374,7 @@ under: |
 subquestion: |
  For example; a choir, a church group, an arts and crafts group, drama group or   a volunteer team. 
 fields:
-  - Group: group_member
+  - no label: group_member
     input type: area 
  
 help: |
@@ -382,9 +382,9 @@ help: |
 --- 
 question: What are you able to do in your life now that you enjoy doing? 
 subquestion: | 
-  For example, garden or look after plants, cook, look after your pet, knit. 
+  For example: gardening, cooking, looking after your pet, knitting. 
 fields:
- activities I can do alone and enjoy doing: individual_activity
+ no label: individual_activity
  input type: area 
  
 help: |
@@ -394,18 +394,18 @@ question: What are you not able to do that you would like to start to learn to d
 subquestion: |
   For example, you would like to be able to cook for yourself or catch public transport on your own. 
 fields:
- Things I can not do alone and would like to learn to do alone: learn_activity
+ no label: learn_activity
  input type: area
 --- 
 question: Write 2 short term goals that you would like to achieve
 subquestion: |
-  Note: A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. 
+  A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the help button for how to write about your goals. 
 fields:
- My 2 short term goals (you can put as much detail in your goal as you like): shortterm_goals
+ no label: shortterm_goals
  input type: area 
  
 help: |
-  Hint: When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  Hint: When thinking of a goal try to make sure it is clear and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
   
   * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
   * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much?;
