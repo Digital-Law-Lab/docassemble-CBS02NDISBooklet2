@@ -4,7 +4,31 @@ objects:
 ---
 Features:
   css: nav_bar.css
-
+  debug: false
+  hide standard menu: true
+---
+features:
+  progress bar: True
+  navigation: True
+---
+sections:
+  - Introduction
+  - Disclaimer
+  - About You:
+    - Your Details
+    - Your Disability 
+    - Your Home
+    - What You Do
+    - Community Involvement
+    - What You Want To Do 
+  - Your Goals
+  - People In Your Life
+  - Your Support:
+    - Support You Use
+    - Support You Need
+  - Your Plan 
+  - Your Meeting
+  - End
 ---
 # This is the welcome screen!!
 mandatory: True
@@ -14,25 +38,36 @@ question: |
   </span>
   
 subquestion: |
-  This program can help you get ready for your NDIS planning meeting. 
+  This program can help you get ready for your NDIS planning meeting. An important part of the planning meeting is having your Booklet 2 filled out. This program can help you answer the questions to create that Booklet for your planning meeting. 
 
   *This application is only for use by people with intellectual disabilities.* 
   
-  **You should have a support worker with you while using this program. If you are under 18 you must have a support worker or family member with you.**
+  **You should have a support worker with you while using this program.** ***If you are under 18 you must have a support worker or family member with you.***
   
+   This program has some hard words. Hard words will be green. If you click your mouse on the green word it will be explained. Ask a friend or family member if you need more help. 
+   
+   Answer all questions honestly. This is important. 
+   
+   Are you ready to start? If you need more help press 'NO' and talk to a CBS worker or family member before continuing. 
+buttons: 
+  - Yes: continue
+  - No: exit
+    url: https://communitybridgingservices.org.au/
+
+section: Introduction
+---
+mandatory: True
+question: |
   <span class="ASAdisclaimerheading">
   ***Disclaimer***
   </span>
   
+subquestion: | 
   <span class="ASAdisclaimer">
-  This program does **not** give legal advice. The information in the booklet is not intended to be a subsitute for legal advice and should not be relied upon as legal advice. Appropriate legal advice should be sought in relation to any matters you may have. 
+  This program does ***not*** give legal advice. Any information in this application or the booklet it produces is not intended to be a subsitute for legal advice and should not be relied upon as legal advice. Appropriate legal advice should be sought in relation to any matters you may have. 
   </span>
   
-  Answer all questions honestly. This is important. 
-  
-  This program has some hard words. Hard words will be green. If you put your mouse on the green word it will be explained. Ask a friend or family member if you need more help. 
-  
-  This program does not guarantee that you will receive funding from NDIS. It can help you prepare for your planning meeting. 
+  This program can help you prepare for your planning meeting. It does not guarantee that you will receive funding from NDIS. 
   
   **The NDIA will make the final decision.**
   
@@ -42,11 +77,15 @@ buttons:
   -  Yes: continue
   -  No: exit
      url: https://communitybridgingservices.org.au/
+Section: Disclaimer 
 ---
 # This code block drives the interview. Initial requirements. 
 mandatory: True
 code: | 
   if ASAaccess == 'Yes': 
+    ASAfirstname
+    ASAndisnumber
+    important_people[0]
     endpoint['eligible']
   else: 
     endpoint['ineligible'] 
@@ -59,9 +98,11 @@ fields:
       - Yes
       - No
 under: | 
-  If you have been told to fill in this application then you have been granted     access. 
+  If your CBS worker has told you to fill in this application then press 'YES'. 
 terms: 
   developmental delay: Developmental delay means a person finds it hard to do everyday things. For example, have a conversation.
+
+Section: About You
 --- 
 # This is ineligible endpoint
 event: endpoint['ineligible']
@@ -72,6 +113,8 @@ buttons:
   - Exit: exit
   - Restart: restart
     url: https://communitybridgingservices.org.au/
+
+section: About You
 ---
 # This is the eligible endpoint
 event: endpoint['eligible']
@@ -91,6 +134,7 @@ subquestion: |
   -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
   *Ask your Local Area Coordinator or a family member to help you!*
   **Below is a table containing the interview questions and your responses.**
+  
   **Question** | **Your Answer**
   -------------|----------------
   Granted Access     | ${ ASAaccess } 
@@ -99,10 +143,19 @@ subquestion: |
   Age                | ${ ASAage } 
   Disability Impact  | ${ ASAdisability }  
   About You          | ${ ASAimportant }
+  %for impt_person in important_people:
+  ${impt_person.name}|${impt_person.info}
+  %endfor
   Your Home          | ${ ASAhome } 
   Daily Tasks        | ${ ASAdaily } 
   Likes              | ${ ASAlikes } 
   Job                | ${ ASAjob } 
+  %for item in community_involvement:
+  ${item.name}       | ${item.info}
+  %endfor
+  %for item in government_support:
+  ${item.name}       | ${item.info}
+  %endfor
   Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday }        | ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
   Sometimes          | ${ ASAsometimes } 
   Activities         | ${ favourite_activity } 
@@ -118,35 +171,50 @@ subquestion: |
   Meeting Companion  | ${ STbring } 
   
   
+  
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
 attachment: 
-  docx template file: Jinja_4_JUNE.docx
+  docx template file: JINJA_FINAL_5_JUNE.docx
   valid formats: 
     - pdf
 buttons:
   - Edit: restart
   - Done: exit
     url: https://communitybridgingservices.org.au/
+
+Section: End
 ---
 question: Write your name.  
+subquestion: Write your own name and not the name of someone who may be helping you. All of the questions will ask for *your* details. You should put your information in as you are the person applying for the plan.  
 fields: 
   - First Name: ASAfirstname
     datatype: text
   - Last Name: ASAlastname
     datatype: text
+
+section: Your Details
+---
+question: Write how old you are.  
+fields: 
+  - no label: ASAage
+    datatype: integer
 ---
 question: Write your NDIS number. 
 fields: 
   - no label: ASAndisnumber
     datatype: integer
 under: |
-  You can find your NDIS number on your Access Request Form or on myGov. It will be made up of 9 numbers. 
---- 
-question: Write how old you are.  
-fields: 
-  - no label: ASAage
-    datatype: integer
+  You can find your NDIS number on your Access Request Form or on myGov. It will be 9 numbers and look something like this: 123 456 789. 
 ---
+question: Write about yourself. 
+subquestion: | 
+  What would you like us to know about you? Write about what makes you happy. Write about what is important to you. If you find it hard to do things that make you happy write about that too. Be honest. 
+fields: 
+  - no label: ASAimportant
+    input type: area
+
+Section: Your Details
+--- 
 question: Write about your disability or developmental delay. Write about how it effects your life. 
 subquestion: | 
   Developlmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
@@ -154,80 +222,25 @@ fields:
   - no label: ASAdisability 
     input type: area
 under: |
-  Be honest and tell the truth. If your disability effects your life a little or a lot, it is ok to write that.  
+  Be honest and tell the truth. There is no wrong answer. If your disability effects your life a lot, it is ok to write that.   
+
+section: Your Disability
 ---
-objects:
-  - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
----
-mandatory: True
-code: |
-  important_people.appendObject()
-  important_people.appendObject()
----
-question: Write about important people in your life who do not work in disability services. Write about what they do with you. For example, write about your family and friends. 
-fields: 
-  - Important person: important_people[i].name.text 
-    choices: 
-    - Mother
-    - Father  
-    - Brother
-    - Sister
-    - Friend  
-    - Other Family Member
-    - Other Important Person 
-    required: false
-  - Write about them here: important_people[i].info
-    input type: area
-    required: false
-list collect:
-  enable: not important_people.has_been_gathered()
-  is final: False
-  allow delete: False
-  label: |
-    Please enter information about an important person
----
-question: Do you want to add any more people?
-yesno: important_people.there_is_another
----
-table: impt_people_table
-rows: important_people
-columns:
-  - Person: row_item.name.text
-  - About: row_item.info
-edit:
-  - name.text
----
-mandatory: True
-question: Here is the table
-subquestion: |
-  ${ impt_people_table }
-  
-  ${ important_people.add_action() }
----  
-question: Write about yourself. 
-subquestion: | 
-  What would you like us to know about you? Write about what makes you happy. Write about what is important to you. If you find it hard to do things that make you happy write about that too. Be honest. 
-fields: 
-  - no label: ASAimportant
-    input type: area
---- 
 question: Write about your home. Write about who you live with. 
 subquestion: |
-  Write about the people you live with. Write about what you like about your home. Write about what could make living in your home better. For example, having someone help you clean or do the gardening, or having a ramp installed. Write about anything that would make your home life easier. 
+  Write about the people you live with. Write about what you like about your home. Write about what could make living in your home easier. For example, having someone help you clean or do the gardening, or having a ramp installed. 
 fields: 
   - no label: ASAhome
     input type: area
+    
+Section: Your Home 
 ---
 question: Write about what you do each day. Write about what you enjoy doing. 
 fields: 
   - no label: ASAdaily
     input type: area
---- 
-question: Write about what you like to do. 
-fields: 
-  - no label: ASAlikes
-    input type: area
-    datatype: text
+
+Section: What You Do
 --- 
 question: Write about your job. 
 subquestion: |
@@ -238,6 +251,36 @@ fields:
     datatype: text
     required: false
 ---
+question: Write about what you do sometimes.
+subquestion: |
+  This could be things like going to the hairdresser or to visit a friend who lives far away. These are not things you do every week.
+fields: 
+  - no label: ASAsometimes
+    input type: area  
+---
+question: Write about what you like to do. 
+fields: 
+  - no label: ASAlikes
+    input type: area
+    datatype: text
+---
+question: What are some fun activities that you like to do? 
+subquestion: |
+   These are things that enjoy doing in your free time. For example, swimming, shopping, cooking, walking your pet.
+fields:
+  - no label: favourite_activity
+    input type: area 
+---
+question: What are you able to do in your life now that you enjoy doing? 
+subquestion: | 
+  For example: gardening, cooking, looking after your pet, knitting. 
+fields:
+ no label: individual_activity
+ input type: area 
+ 
+under: |
+ These can be simple everyday things like bathing without help. They can also be more complex things such as managing your own finances. 
+--- 
 objects:
   - community_involvement: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
 ---
@@ -269,7 +312,10 @@ list collect:
   allow delete: False
   label: |
     Please enter information about what you do for fun and your community involvement.
+
+Section: Community Involvement 
 ---
+
 question: Do you want to add any more activities?
 yesno: community_involvement.there_is_another
 ---
@@ -287,6 +333,137 @@ subquestion: |
   ${ com_involvement_table }
   
   ${ community_involvement.add_action() }
+---
+question: Are you a part of any groups? 
+under: |
+subquestion: |
+ For example; a choir, a church group, an arts and crafts group, drama group or   a volunteer team. 
+fields:
+  - no label: group_member
+    input type: area 
+ 
+help: |
+  These are groups that you join to do a specific activity with other people to achieve a specific goal or for fun. These groups can be formal groups which are task based e.g. a poltical group. These groups can also be informal meaning they are groups which are created usually with friends to do common activities between members e.g. a prayer group.
+---
+question: Write 2 short term goals that you would like to achieve
+subquestion: |
+  A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the help button for how to write about your goals. 
+fields:
+ no label: shortterm_goals
+ input type: area 
+ 
+help: |
+  When thinking of a goal try to make sure it is clear and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  
+  * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much?;
+  * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday.
+
+Section: Your Goals 
+--- 
+question: Write 2 long term goals that you would like to achieve
+Subquestion: |
+  Note: Long term goals can be goals that you would like to reach in a few years. These goals are goals that need e.g. specific skills that you need to attain over time e.g. getting a job. Press the help button for how to write about your goals. 
+fields:
+ My 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
+ input type: area 
+ 
+help: |
+  When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  
+  * Specific (simple, sensible, significant). This means that it is clear, and you know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as;  how much? E.g. writing I want to be able to run is not measurable, you need to know how many kms you would like to run and in what time frame;
+  * Achievable (agreed, attainable). This means the goal is something that you can reach and are able to do;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be reached e.g. in two years. 
+---
+objects:
+  - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  important_people.appendObject()
+  important_people.appendObject()
+---
+question: Write about important people in your life who do not work in disability services. Write about what they do with you. For example, write about your family and friends. 
+fields: 
+  - Important person: important_people[i].name.text 
+    choices: 
+    - Mother
+    - Father  
+    - Brother
+    - Sister
+    - Friend  
+    - Other Family Member
+    - Other Important Person 
+    required: false
+  - Write about them here: important_people[i].info
+    input type: area
+    required: false
+list collect:
+  enable: not important_people.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about an important person
+
+Section: People In Your Life
+---
+question: Do you want to add any more people?
+yesno: important_people.there_is_another
+---
+table: impt_people_table
+rows: important_people
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ impt_people_table }
+  
+  ${ important_people.add_action() }
+---  
+question: Write about what you do each week. Write about what supports you use to do these things. 
+subquestion: |
+  Supports can include things like needing a carer or family member to take you places, a walking frame, or a support animal. Write about anything that helps you do your daily tasks. 
+fields: 
+  - Monday: ASAMonday
+    input type: area 
+  - Tuesday: ASATuesday
+    input type: area
+  - Wednesday: ASAWednesday
+    input type: area
+  - Thursday: ASAThursday
+    input type: area
+  - Friday: ASAFriday
+    input type: area
+  - Saturday: ASASaturday
+    input type: area
+  - Sunday: ASASunday
+    input type: area
+
+section: Support You Use
+---
+question: What kind of help do you get already and want to keep?
+fields:
+  - List the people that help you each day and what they help you do: STcurrenthelp
+    input type: area
+subquestion: |
+  For Example: Do you have someone who...
+  
+  - takes you to appointments
+  
+  - helps you go shopping
+  
+  - brings you food
+  
+  - helps you do things at home (shower or clean) 
 ---
 objects:
   - government_support: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -336,114 +513,15 @@ subquestion: |
   
   ${ government_support.add_action() }
 ---
-question: Write about what you do each week. Write about what supports you use to do these things. 
-subquestion: |
-  Supports can include things like needing a carer or family member to take you places, a walking frame, or a support animal. Write about anything that helps you do your daily tasks. 
-fields: 
-  - Monday: ASAMonday
-    input type: area 
-  - Tuesday: ASATuesday
-    input type: area
-  - Wednesday: ASAWednesday
-    input type: area
-  - Thursday: ASAThursday
-    input type: area
-  - Friday: ASAFriday
-    input type: area
-  - Saturday: ASASaturday
-    input type: area
-  - Sunday: ASASunday
-    input type: area
----
-question: Write about what you do sometimes.
-subquestion: |
-  This could be things like going to the hairdresser or to visit a friend who lives far away. These are not things you do every week.
-fields: 
-  - no label: ASAsometimes
-    input type: area  
----
-question: What are some fun activities that you like to do? 
-subquestion: |
-   These are things that enjoy doing in your free time. For example, swimming, shopping, cooking, walking your pet.
-fields:
-  - favourite activity: favourite_activity
-    input type: area 
---- 
-question: Are you a part of any groups? 
-under: |
-subquestion: |
- For example; a choir, a church group, an arts and crafts group, drama group or   a volunteer team. 
-fields:
-  - Group: group_member
-    input type: area 
- 
-help: |
-  These are groups that you join to do a specific activity with other people to achieve a specific goal or for fun. These groups can be formal groups which are task based e.g. a poltical group. These groups can also be informal meaning they are groups which are created usually with friends to do common activities between members e.g. a prayer group.
---- 
-question: What are you able to do in your life now that you enjoy doing? 
-subquestion: | 
-  For example, garden or look after plants, cook, look after your pet, knit. 
-fields:
- activities I can do alone and enjoy doing: individual_activity
- input type: area 
- 
-help: |
- These can be simple everyday things like bathing without help. They can also be more complex things such as managing your own finances.  
---- 
 question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
 subquestion: |
   For example, you would like to be able to cook for yourself or catch public transport on your own. 
 fields:
- Things I can not do alone and would like to learn to do alone: learn_activity
+ no label: learn_activity
  input type: area
---- 
-question: Write 2 short term goals that you would like to achieve
-subquestion: |
-  Note: A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. 
-fields:
- My 2 short term goals (you can put as much detail in your goal as you like): shortterm_goals
- input type: area 
  
-help: |
-  Hint: When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
-  
-  * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
-  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much?;
-  * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
-  * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
-  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday. 
+Section: Support You Need
 --- 
-question: Write 2 long term goals that you would like to achieve
-Subquestion: |
-  Note: Long term goals can be goals that you would like to reach in a few years. These goals are goals that need e.g. specific skills that you need to attain over time e.g. getting a job. Use the SMART goal guide (press help) to make these goals. 
-fields:
- My 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
- input type: area 
- 
-help: |
-  Hint: When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
-  
-  * Specific (simple, sensible, significant). This means that it is clear, and you know why you want to reach that goal;
-  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as;  how much? E.g. writing I want to be able to run is not measurable, you need to know how many kms you would like to run and in what time frame;
-  * Achievable (agreed, attainable). This means the goal is something that you can reach and are able to do;
-  * Relevant (reasonable, realistic and resourced, results-based). This means that the goal is something that can be added into your life without causing any         problems; and
-  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be reached e.g. in two years. 
----
-question: What kind of help do you get already and want to keep?
-fields:
-  - List the people that help you each day and what they help you do: STcurrenthelp
-    input type: area
-subquestion: |
-  For Example: Do you have someone who...
-  
-  - takes you to appointments
-  
-  - helps you go shopping
-  
-  - brings you food
-  
-  - helps you do things at home (shower or clean) 
----
 question: Is there anything else you need help with?
 fields:
   - Write other things you need help doing but dont have someone to help you do them: STmorehelp
@@ -458,22 +536,7 @@ fields:
 under: |
   For Example: Is it hard for you to get dressed but you haven’t told us about it yet?
 ---
-question: You can bring someone along with you to your meeting for help.
-fields:
-  - Who would you like to bring?: STbring
-    datatype: target_variable
-    choices:
-    - Mum
-    - Dad
-    - Support worker
-    - Carer 
-    - Friend
-    - Sister
-    - Brother
-    - No one
-    - Other
----
-question: The NDIS will give you money to pay for the things you need help with. This is called *your plan.*
+question: People with an NDIS plan may get support and services they need. The booklet you have created can help you make an NDIS plan.
 fields:
   - Who would you like to be in charge of your plan?: STplan
     datatype: target_variable
@@ -492,4 +555,23 @@ under: |
   -	An NDIA planner
   
   The document given to you at the end of this interview will give you more information on this. 
+  
+Section: Your Plan
+---
+question: You can bring someone along with you to your meeting for help.
+fields:
+  - Who would you like to bring?: STbring
+    datatype: target_variable
+    choices:
+    - Mum
+    - Dad
+    - Support worker
+    - Carer 
+    - Friend
+    - Sister
+    - Brother
+    - No one
+    - Other
+    
+section: Your Meeting
 ---
