@@ -2,10 +2,17 @@
 objects: 
   - endpoint: DADict
 ---
+Features:
+  css: nav_bar.css
+
+---
 # This is the welcome screen!!
 mandatory: True
 question: |
+ <span class="ASAheader">
   Preparing for your NDIS planning meeting with CBS Inc. 
+  </span>
+  
 subquestion: |
   This program can help you get ready for your NDIS planning meeting. 
 
@@ -13,9 +20,13 @@ subquestion: |
   
   **You should have a support worker with you while using this program. If you are under 18 you must have a support worker or family member with you.**
   
+  <span class="ASAdisclaimerheading">
   ***Disclaimer***
+  </span>
   
-  This program is **not** legal advice. 
+  <span class="ASAdisclaimer">
+  This program does **not** give legal advice. The information in the booklet is not intended to be a subsitute for legal advice and should not be relied upon as legal advice. Appropriate legal advice should be sought in relation to any matters you may have. 
+  </span>
   
   Answer all questions honestly. This is important. 
   
@@ -33,7 +44,7 @@ buttons:
      url: https://communitybridgingservices.org.au/
 ---
 # This code block drives the interview. Initial requirements. 
-mandatory: True 
+mandatory: True
 code: | 
   if ASAaccess == 'Yes': 
     endpoint['eligible']
@@ -43,12 +54,12 @@ code: |
 # This question block asks the questions to drive the code block above
 question: Have you been granted access to the NDIS as someone with an intellectual disability or {developmental delay}?  
 fields: 
-  - no label: ASAaccess
+  - no label:  ASAaccess
     choices: 
       - Yes
       - No
 under: | 
-If you have been told to fill in this application then you have been granted access. 
+  If you have been told to fill in this application then you have been granted     access. 
 terms: 
   developmental delay: Developmental delay means a person finds it hard to do everyday things. For example, have a conversation.
 --- 
@@ -68,22 +79,18 @@ question: COMPLETED
 subquestion: |
  **Please read this infomation carefully:**
   
-  Your Local Area Coordinator (LAC) will organise a meeting time and will contact you about it. 
+  Your Local Area Coordinator (LAC) should be in touch to organise a meeting time and will contact you about it. 
   
-  There is a pdf document available for you to download or email to yourself at the very bottom of the page. It is below the table that shows the answers you gave today. Scroll down to find it. 
-
+  There is a pdf document available for you to download or email to yourself at the very bottom of the page. It is below the table that shows the answers you gave today. Scroll down to the end (past the table below) of the page to find it. 
   **Remember to bring these things to your meeting:**
   
-  - The pdf document at the very bottom of this page 
+  - The pdf document at the very bottom of this page.
   
   -	Your bank account information. This means you must bring your account name, account number and BSB. 
   
-  -	Your MyGov account information 
-
+  -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
   *Ask your Local Area Coordinator or a family member to help you!*
-
   **Below is a table containing the interview questions and your responses.**
-
   **Question** | **Your Answer**
   -------------|----------------
   Granted Access     | ${ ASAaccess } 
@@ -96,7 +103,7 @@ subquestion: |
   Daily Tasks        | ${ ASAdaily } 
   Likes              | ${ ASAlikes } 
   Job                | ${ ASAjob } 
-  Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday }                      | ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
+  Daily Tasks        | ${ ASAMonday } ${ ASATuesday } ${ ASAWednesday} ${ ASAThursday }        | ${ ASAFriday } ${ ASASaturday } ${ ASASunday } 
   Sometimes          | ${ ASAsometimes } 
   Activities         | ${ favourite_activity } 
   Group Membership   | ${ group_member } 
@@ -112,9 +119,8 @@ subquestion: |
   
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
-
 attachment: 
-  docx template file: Jinja_Populated_Document_1_JUNE.docx
+  docx template file: Jinja_4_JUNE.docx
   valid formats: 
     - pdf
 buttons:
@@ -148,7 +154,7 @@ fields:
   - no label: ASAdisability 
     input type: area
 under: |
-Be honest. If your disability effects your life alot then write about that. You do not need to pretend that things are good if they are not. 
+  Be honest and tell the truth. If your disability effects your life a little or a lot, it is ok to write that.  
 ---
 objects:
   - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -166,9 +172,9 @@ fields:
     - Father  
     - Brother
     - Sister
-    - Friend
+    - Friend  
     - Other Family Member
-    - Other Person 
+    - Other Important Person 
     required: false
   - Write about them here: important_people[i].info
     input type: area
@@ -262,7 +268,7 @@ list collect:
   is final: False
   allow delete: False
   label: |
-    Please enter information about what you do for fun and your community involvement
+    Please enter information about what you do for fun and your community involvement.
 ---
 question: Do you want to add any more activities?
 yesno: community_involvement.there_is_another
@@ -357,62 +363,45 @@ fields:
     input type: area  
 ---
 question: What are some fun activities that you like to do? 
-under: |
-  Note: these are things that enjoy doing in your free time.
+subquestion: |
+   These are things that enjoy doing in your free time. For example, swimming, shopping, cooking, walking your pet.
 fields:
-  - Favourite activity: favourite_activity
+  - favourite activity: favourite_activity
     input type: area 
- 
-help: |
-  Hint: these are things you like to do in your free time. For example, swimming, shopping, cooking, walking your pet.
-  
-continue button label: next 
-Mandatory: True
 --- 
 question: Are you a part of any groups? 
 under: |
-  Note: for example; a choir, a church group, an arts and crafts group, drama group.
+subquestion: |
+ For example; a choir, a church group, an arts and crafts group, drama group or   a volunteer team. 
 fields:
   - Group: group_member
     input type: area 
  
 help: |
-  Hint: these are groups that you join to do a specific activity with other people.
-  
-continue button label: next 
-Mandatory: True
+  These are groups that you join to do a specific activity with other people to achieve a specific goal or for fun. These groups can be formal groups which are task based e.g. a poltical group. These groups can also be informal meaning they are groups which are created usually with friends to do common activities between members e.g. a prayer group.
 --- 
 question: What are you able to do in your life now that you enjoy doing? 
-under: |
-  Note: for example, garden or look after plants, cook, look after your pet, knit. 
+subquestion: | 
+  For example, garden or look after plants, cook, look after your pet, knit. 
 fields:
  activities I can do alone and enjoy doing: individual_activity
  input type: area 
  
 help: |
-  Hint: these can be things like bathing without help or catching public transport alone.
-  
-continue button label: next 
-Mandatory: True
+ These can be simple everyday things like bathing without help. They can also be more complex things such as managing your own finances.  
 --- 
 question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
-under: |
-  Note: for example, you would like to be able to cook for yourself or catch public transport on your own. 
+subquestion: |
+  For example, you would like to be able to cook for yourself or catch public transport on your own. 
 fields:
- things I can not do alone and would like to learn to do alone: learn_activity
+ Things I can not do alone and would like to learn to do alone: learn_activity
  input type: area
- 
-help: |
-  Hint: for example: someone may help you dress every morningbut you would like to start doing that alone. 
-  
-continue button label: next 
-Mandatory: True
 --- 
 question: Write 2 short term goals that you would like to achieve
-under: |
+subquestion: |
   Note: A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. 
 fields:
- my 2 short term goals (you can put as much detail in your goal as you like):  shortterm_goals
+ My 2 short term goals (you can put as much detail in your goal as you like): shortterm_goals
  input type: area 
  
 help: |
@@ -423,34 +412,28 @@ help: |
   * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
   * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
   * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday. 
-  
-continue button label: next 
-Mandatory: True
 --- 
 question: Write 2 long term goals that you would like to achieve
-under: |
+Subquestion: |
   Note: Long term goals can be goals that you would like to reach in a few years. These goals are goals that need e.g. specific skills that you need to attain over time e.g. getting a job. Use the SMART goal guide (press help) to make these goals. 
 fields:
- my 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
+ My 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
  input type: area 
  
 help: |
   Hint: When thinking of a goal try to make sure it is clear (specific) and reachable. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
   
-  * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
-  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much?;
-  * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do;
-  * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
-  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday. 
-  
-continue button label: next 
-Mandatory: True
+  * Specific (simple, sensible, significant). This means that it is clear, and you know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you should be able to know       when your goal is achieved. To do this you need to answer questions such as;  how much? E.g. writing I want to be able to run is not measurable, you need to know how many kms you would like to run and in what time frame;
+  * Achievable (agreed, attainable). This means the goal is something that you can reach and are able to do;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be reached e.g. in two years. 
 ---
 question: What kind of help do you get already and want to keep?
 fields:
   - List the people that help you each day and what they help you do: STcurrenthelp
     input type: area
-under: |
+subquestion: |
   For Example: Do you have someone who...
   
   - takes you to appointments
@@ -465,8 +448,8 @@ question: Is there anything else you need help with?
 fields:
   - Write other things you need help doing but dont have someone to help you do them: STmorehelp
     input type: area
-under: |
-  For Example: Do you want to visit friends but dont have someone to come with you?
+subquestion: |
+  For Example: Do you want to visit friends but do not have someone to come with you?
 ---
 question: Is there any other information you want the NDIS to know about you?
 fields:
@@ -504,7 +487,6 @@ under: |
   If no one has talked to you about picking someone to be in charge of your plan...select **I dont know yet**
   
   Ask these people to help you pick who you want in charge of *your plan*:
-
   -	A Local Area Coordinator (LAC) 
   
   -	An NDIA planner

@@ -1,0 +1,64 @@
+.navbar{
+    background-color: rgb(231, 137, 60) !important;
+}
+.navbar .navbar-brand{
+    color : rgb(38, 51, 118);
+    font-weight: bolder;
+    font-size: 1.3em;
+}
+.navbar .navbar-brand:hover{
+    color: rgb(38, 52, 118, 0.3);
+}
+
+.navbar .nav-item a{
+    color: rgb(38, 52, 118) !important;
+}
+
+.navbar .dropdown-menu{
+    /*  the rgba() function works just like rgb in that
+        it sets a colour.  But the fourth element sets an
+        'alpha' or transaparency value.  Here we are saying
+        to set the transparency to 30%
+    */
+    background-color: rgba(231, 137, 60,0.3);
+}
+.dropdown-item:hover{
+    background-color: rgba(231, 137, 60,0.3);
+}
+.navbar form button{
+    background-color: rgb(231, 137, 60);
+    color: rgb(2525, 255, 255);
+    /* setting the border to 0 disables the border around the button */
+    border:0;
+}
+.navbar form button:hover{
+    background-color: rgb(0,0,0)
+}
+
+.btn-primary{
+  color: rgb(255, 255, 255);
+  background-color: rgb(38, 52, 118);
+  border-color: rgb(0, 0, 0);
+}
+
+.btn-primary:hover{
+  color: rgb(0,0,0);
+  background-color: rgba(28, 52, 118, 0.3);
+  border-color: rgb(0, 0, 0);
+}
+.ASAdisclaimer{
+   color: rgb(234, 50, 35);
+  font-size: 1.0em;
+    /* Make it bold */
+    font-weight: bolder;
+}
+.ASAdisclaimerheading{
+   color: rgb(234, 50, 35);
+   font-size: 1.2em;
+   font-weight: bolder;
+}
+.ASAheader{
+   color: rgb(38, 52, 118);
+   font-size: 1.2em;
+   font-weight: bolder;
+} 
