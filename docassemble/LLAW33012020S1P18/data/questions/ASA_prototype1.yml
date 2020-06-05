@@ -47,6 +47,9 @@ buttons:
 mandatory: True
 code: | 
   if ASAaccess == 'Yes': 
+    ASAfirstname
+    ASAndisnumber
+    important_people[0]
     endpoint['eligible']
   else: 
     endpoint['ineligible'] 
@@ -91,6 +94,7 @@ subquestion: |
   -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
   *Ask your Local Area Coordinator or a family member to help you!*
   **Below is a table containing the interview questions and your responses.**
+  
   **Question** | **Your Answer**
   -------------|----------------
   Granted Access     | ${ ASAaccess } 
@@ -116,6 +120,9 @@ subquestion: |
   Other Information  | ${ STotherpersoninfo } 
   Plan Supervisor    | ${ STplan }
   Meeting Companion  | ${ STbring } 
+  %for impt_person in important_people:
+  ${impt_person.name}|${impt_person.info}
+  %endfor
   
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
