@@ -39,7 +39,7 @@ code: |
   
   STGlogostring += CBSLogo.url_for()
  
-  STGlogostring += '" class="mr-2.5" height="60">'
+  STGlogostring += '" class="mr-2.8" height="52">'
   STGlogostring += '<div class="media-body">'
   STGlogostring += '<h5 class="mt-0">&nbsp; <b>' + STGmetadata['title'] + '</b></h5>'
   STGlogostring += '</div></div>'
