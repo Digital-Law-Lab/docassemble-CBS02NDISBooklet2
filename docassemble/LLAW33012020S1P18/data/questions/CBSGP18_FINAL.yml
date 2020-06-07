@@ -405,9 +405,13 @@ fields:
     input type: area 
     default: I go to a social craft group with a friend a few times a month. 
 ---
+images: 
+  helpbutton: hbutton2.PNG
+--- 
 question: Write 2 short term goals that you would like to achieve
 subquestion: |
-  A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the help button for how to write your goals. 
+  A short term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the :helpbutton: button for how to write about your goals. 
+
 fields:
   - Goal 1: short_goals1
     input type: area 
@@ -507,46 +511,46 @@ question: Write about what you do each week. Write about what supports you use t
 subquestion: |
   Supports can include things like needing a carer or family member to take you places, a walking frame, or a support animal. Write about anything that helps you do your daily tasks. 
 fields: 
-  - What I do on MONDAYS: ASAMonday
+  - What I do on Mondays: ASAMonday
     input type: area 
     default: Every Monday I see my psychologist. 
-  - Supports: ASAMondaysup
+  - Monday supports: ASAMondaysup
     input type: area 
     default: My mum drives me to these appointments. I have a mental health care plan from my doctor that helps me pay for these visits. 
-  - What I do on TUESDAYS: ASATuesday
+  - What I do on Tuesdays: ASATuesday
     input type: area
     default: I volunteer at my local school.  
-  - Supports: ASATuesdaysup
+  - Tuesday supports: ASATuesdaysup
     input type: area
     default: Mum drives me to the school. The school is big and I sometimes need help getting around. 
-  - What I do on WEDNESDAYS: ASAWednesday
+  - What I do on Wednesdays: ASAWednesday
     input type: area
     default: I go to the library. 
-  - Supports: ASAWednesdaysup
+  - Wednesday supports: ASAWednesdaysup
     input type: area
     default: Some Wednesdays my library has local events that I like to go to. I am not confident getting the bus there yet so mum will drive me and stays with me so I can borrow books and attend the event. 
-  - What I do on THURSDAYS: ASAThursday
+  - What I do on Thursdays: ASAThursday
     input type: area
     default: Dance classes. 
-  - Supports: ASAThursdaysup
+  - Thursday supports: ASAThursdaysup
     input type: area
     default: Mum drives me. My friends help me in class. 
-  - What I do on FRIDAYS: ASAFriday
+  - What I do on Fridays: ASAFriday
     input type: area
     default: Movie night. 
-  - Supports: ASAFridaysup
+  - Friday supports: ASAFridaysup
     input type: area
     default: My partner and I go to the movies most Friday nights. Having a job would make this easier so I could spend my own money. 
-  - What I do on SATURDAYS: ASASaturday
+  - What I do on Saturdays: ASASaturday
     input type: area
     default: I normally see my friends on the weekend. 
-  - Supports: ASASaturdaysup
+  - Saturday upports: ASASaturdaysup
     input type: area
     default: My friends sometimes come to our house. If we go somewhere else mum will normally drop me off. Sometimes a support worker comes on Saturdays when I do not see friends so that I can go to the museum in the city. 
-  - What I do on SUNDAYS: ASASunday
+  - What I do on Sundays: ASASunday
     input type: area
     default: My mum and I get ready for the week. 
-  - Supports: ASASundaysup
+  - Sunday supports: ASASundaysup
     input type: area
     default: A support worker normally comes to see me on Sundays and she helps mum and I get ready for the week. We all cook and clean and my support worker will take me food shopping. 
 
@@ -644,7 +648,9 @@ fields:
 under: |
   For example: Is it hard for you to get dressed but you haven’t told us about it yet? If you think you have told us everything then you can also use this space to write down any questions you may want to ask at the planning meeting. 
 ---
-question: People with an NDIS plan may get support and services they need. The booklet you have filled out may help make your NDIS plan.
+
+question: The booklet you have created can help you prepare for your planning meeting. The planning meeting is part of deciding if you will get an NDIS plan. People with an NDIS plan get support and services for things they need. 
+
 fields:
   - Who would you like to be in charge of your plan?: STplan
     datatype: target_variable
