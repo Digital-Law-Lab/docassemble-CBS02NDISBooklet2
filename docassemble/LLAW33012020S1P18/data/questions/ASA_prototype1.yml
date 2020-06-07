@@ -7,6 +7,45 @@ Features:
   debug: false
   hide standard menu: true
 ---
+default screen parts:
+  post: |
+    <div style="display: flex; height: 100px; align-items: flex-end; flex-direction: row-reverse">
+    <div style="margin: 5px"><img src="https://staff.flinders.edu.au/etc.clientlibs/flinders/clientlibs/clientlib-site/resources/images/flinderuni_main_logo_black.png" height="40">
+    </div>
+    <div style="margin: 5px; text-align: center">
+    <cite><small><i>
+    Developed by Flinders University in collaboration with CBS Inc.
+    </i></small></cite>
+    </div>
+    </div>
+---
+metadata:
+  title: |
+   Preparing Booklet 2
+  authors:
+    - name: Ashleigh Mcnichol
+    - name: Ayat Hatem
+    - name: Stefanie Taylor 
+  organisation:  Flinders University
+---
+objects:
+  - CBSLogo: DAStaticFile.using(filename='CBS-logo-small-white.png')
+---
+mandatory: True
+code: |
+  STGmetadata = all_variables(special='metadata')
+  
+  STGlogostring = '<div class="media"><img src="'
+  
+  STGlogostring += CBSLogo.url_for()
+ 
+  STGlogostring += '" class="mr-2.5" height="60">'
+  STGlogostring += '<div class="media-body">'
+  STGlogostring += '<h5 class="mt-0">&nbsp; <b>' + STGmetadata['title'] + '</b></h5>'
+  STGlogostring += '</div></div>'
+  
+  set_parts(logo=STGlogostring)
+---
 features:
   progress bar: True
   navigation: True
@@ -213,7 +252,7 @@ fields:
 under: |
   You can find your NDIS number on myplace through myGov. It will be 9 numbers and look something like this: 123 456 789. This picture shows you were to find it on myplace. 
   
-          [FILE numbergraphic.png] 
+                  [FILE numbergraphic.png] 
 ---
 question: Write about yourself. 
 subquestion: | 
