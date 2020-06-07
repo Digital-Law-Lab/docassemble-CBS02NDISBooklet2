@@ -45,7 +45,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 setup(name='docassemble.LLAW33012020S1P18',
       version='0.0.1',
       description=('A docassemble extension.'),
-      long_description='# P18\r\nhello...\r\n',
+      long_description='# P18\r\nhello.\r\n',
       long_description_content_type='text/markdown',
       author='Ashleigh McNichol',
       author_email='mcni0040@flinders.edu.au',
