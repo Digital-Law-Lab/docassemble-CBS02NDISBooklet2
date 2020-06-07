@@ -39,7 +39,7 @@ code: |
   
   STGlogostring += CBSLogo.url_for()
  
-  STGlogostring += '" class="mr-2.8" height="52">'
+  STGlogostring += '" class="mr-90" height="54" Width="180">'
   STGlogostring += '<div class="media-body">'
   STGlogostring += '<h5 class="mt-0">&nbsp; <b>' + STGmetadata['title'] + '</b></h5>'
   STGlogostring += '</div></div>'
@@ -230,7 +230,7 @@ Section: End
 ---
 question: Write your name.  
 subquestion: | 
-  Write your own name and not the name of someone who may be helping you. All of the questions will ask for *your* details. You should put your information in as you are the person applying for the plan.  
+  Write your own name and not the name of someone who may be helping you. All of the questions will ask for *your* details. You need to put your details in because the plan will be for you.  
 fields: 
   - First Name: ASAfirstname
     datatype: text
@@ -253,7 +253,7 @@ fields:
     datatype: integer
     default: 123456789
 under: |
-  You can find your NDIS number on myplace through myGov. It will be 9 numbers and look something like this: 123 456 789. This picture shows you were to find it on myplace. 
+  You can find your NDIS number on myplace through your myGov account. It will be 9 numbers and look something like this: 123 456 789. This picture shows you were to find it on myplace. 
   
   [FILE numbergraphic.png] 
 ---
@@ -263,17 +263,17 @@ subquestion: |
 fields: 
   - no label: ASAimportant
     input type: area
-    default: I like to be with my family and friends and they are very important to me. I like going to the movies and going shopping and bowling. Sometimes this can be hard because I need someone to drive me there. 
+    default: I like to be with my family and friends, they are very important to me. I like going to the movies, going shopping and bowling. Sometimes, this can be hard because I need someone to drive me there. 
 
 Section: Your Details
 --- 
-question: Write about your intellectual disability or developmental delay. Write about how it effects your life. 
+question: Write about your intellectual disability or developmental delay. Write about how it affects your life. 
 subquestion: | 
   Developmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
 fields: 
   - no label: ASAdisability 
     input type: area
-    default: It can sometimes be difficult to have a conversation with people I do not know very well.  
+    default: It is difficult for me to have a conversation with people I do not know very well.  
 under: |
   There is no wrong answer. If your disability affects your life a lot, it is ok to write that. Be honest and tell the truth. 
 
@@ -281,12 +281,12 @@ section: Your Disability
 ---
 question: Write about your home. Write about who you live with. 
 subquestion: |
-  Write about the people you live with and what you like about your home. Write about what you like about your home. 
+  Write about the people you live with and what you like about your home. 
   Write about what could make living in your home easier. For example, having someone help you clean or do the gardening, or having a ramp installed. 
 fields: 
   - no label: ASAhome
     input type: area
-    default: I live at home with my partner and my mum. I am very close with my mum. I like living with them both because they can help me with some things I find more difficult like cooking. 
+    default: I live at home with my partner and my mum. I am very close with my mum. I like living with them both because they can help me with some things I find difficult like cooking. 
     
 Section: Your Home 
 ---
@@ -304,7 +304,7 @@ Section: What You Do
 --- 
 question: Write about your job. 
 subquestion: |
-  This can include if you do {volunteer work}. If you do not have a job or volunteer work do not write anything. 
+  This can include volunteer work. If you do not have a job or volunteer work, do not write anything. 
 fields: 
   - no label: ASAjob
     input type: area
@@ -327,7 +327,7 @@ fields:
   - no label: ASAlikes
     input type: area
     datatype: text
-    default: On the weekends I like to spend time with my friends. I like to walk our new puppy and care for him. I like to go for walks but sometimes need help putting my shoes on for this. (again this question a bit repetitive, might still edit a little) 
+    default: On the weekends I like to spend time with my friends. I like to walk my new puppy and care for him. I like to go for walks but sometimes need help putting my shoes on for this. (again this question a bit repetitive, might still edit a little) 
 ---
 question: What are you able to do in your life now that you enjoy doing? What are some fun activities that you like to do? 
 subquestion: | 
@@ -407,7 +407,7 @@ fields:
 ---
 question: Write 2 short term goals that you would like to achieve
 subquestion: |
-  A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the help button for how to write about your goals. 
+  A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the help button for how to write your goals. 
 fields:
   - Goal 1: short_goals1
     input type: area 
@@ -433,10 +433,10 @@ Subquestion: |
 fields:
   - Goal 1: long_goals1
     input type: area 
-    default: In the next few years, I want to move out of home, maybe with a friend. To do this I would need to save money, practise cooking and showering on my own and practise catching public transport. 
+    default: In the next 2-3 years, I want to move out of home, maybe with a friend. To do this I would need to save money, practise cooking and showering on my own and practise catching public transport. 
   - Goal 2: long_goals2
     input type: area
-    default: Get a job so that I can pay my own bills. To do this I would need to practise talking to strangers. I would need to write a resume and get a friend to help me. I would also have to practise catching public transport. 
+    default: Get a job working at the library in 2-3 years so that I can pay my own bills. To do this I would need to practise talking to strangers. I would need to write a resume and get a friend to help me. I would also have to practise catching public transport. 
  
 help: |
   When thinking of a goal try to make sure it is clear and possible to do. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
@@ -558,15 +558,15 @@ fields:
     input type: area
     default: Mum helps me with alot of things. She drives me and helps me cooking and other general house kind of things. My partner also helps me with these things. I have a support worker who helps me with some social situations. 
 subquestion: |
-  For Example: Do you have someone who...
+  For Example: Do you have someone who;
   
-  - takes you to appointments
+  - takes you to appointments;
   
-  - helps you go shopping
+  - helps you go shopping;
   
-  - brings you food
+  - brings you food or;
   
-  - helps you do things at home (shower or clean) 
+  - helps you do things at home (shower or clean). 
 ---
 objects:
   - government_support: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -592,7 +592,7 @@ fields:
   - Write about it here: government_support[i].info
     input type: area
     required: false
-    default: I see a good doctor at our local clinic who works closely with my psychologist. 
+    default: I see a good doctor at my local clinic that works closely with my psychologist. 
 list collect:
   enable: not government_support.has_been_gathered()
   is final: False
@@ -618,13 +618,13 @@ subquestion: |
   
   ${ government_support.add_action() }
 ---
-question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
+question: What are you **not** able to do that you would like to learn to do or be able to do on your own? 
 subquestion: |
   For example: you would like to be able to cook for yourself or catch public transport on your own. 
 fields:
  no label: learn_activity
  input type: area
- default: I would really like to start taking public transport. I would like to feel more confident to do so. This would make me alot more independent. 
+ default: I would really like to start using public transport alone. I would like to feel more confident to do so. This would make me more independent. 
  
 Section: Support You Need
 --- 
@@ -632,9 +632,9 @@ question: Is there anything else you need help with?
 fields:
   - Write other things you need help doing but do not have someone to help you do them: STmorehelp
     input type: area
-    default: I would like to visit some group therapy classes that are too far away for my mum to take me.  
+    default: I would like to visit a group therapy class that is too far away for my mum to take me.  
 subquestion: |
-  For example: Do you want to visit friends but do not have someone to come with you?
+  For example: Do you want to visit friends but do not have someone to take you?
 ---
 question: Is there any other information you want the NDIS to know about you? 
 fields:
@@ -644,26 +644,27 @@ fields:
 under: |
   For example: Is it hard for you to get dressed but you haven’t told us about it yet? If you think you have told us everything then you can also use this space to write down any questions you may want to ask at the planning meeting. 
 ---
-question: People with an NDIS plan may get support and services they need. The booklet you have created can help you make an NDIS plan.
+question: People with an NDIS plan may get support and services they need. The booklet you have filled out may help make your NDIS plan.
 fields:
   - Who would you like to be in charge of your plan?: STplan
     datatype: target_variable
     choices:
-    - I dont know yet
+    - I don't know yet
     - I want to be in charge
     - A Plan Manager 
     - The NDIA
-    default: I want to be in charge
+    default: I want to be in charge.
 
 under: |
-  If no one has talked to you about picking someone to be in charge of your plan...select **I dont know yet**
+  If no one has talked to you about picking someone to be in charge of your plan, select **I don't know yet**.
   
-  Ask these people to help you pick who you want in charge of *your plan*:
-  -	A Local Area Coordinator (LAC)  
+  Ask these people to help you pick who you want in charge of *your plan*;
   
-  -	An NDIA planner
+  -	A Local Area Coordinator (LAC) or; 
   
-  The document given to you at the end of this interview will give you more information on this. 
+  -	An NDIA planner.
+  
+  The completed Booklet 2 that you can get the end of this interview will give you more information about this. 
   
 Section: Your Plan
 ---
@@ -681,7 +682,7 @@ fields:
     - Brother
     - No one
     - Other
-    default: Mum 
+    default: Mum
    
     
 section: Your Meeting
