@@ -383,17 +383,16 @@ subquestion: |
   ${ community_involvement.add_action() }
 ---
 question: Are you a part of any groups? 
-under: |
 subquestion: |
  This could be things like being part of a choir, a church group, an arts and crafts group, drama group or a volunteer team. 
 fields:
   - no label: group_member
     input type: area 
  
-help: |
+under: |
   These are groups that you join to do a specific activity with other people to achieve a specific goal or for fun. These groups can be formal groups which are task based e.g. a poltical group. These groups can also be informal meaning they are groups which are created usually with friends to do common activities between members e.g. a prayer group.
 ---
-question: Write 2 short term goals that you would like to achieve
+question: Write **2** short term goals that you would like to achieve
 subquestion: |
   A short-term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Press the help button for how to write about your goals. 
 fields:
@@ -409,13 +408,16 @@ help: |
   * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
   * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday.
 
+under: |
+ You can put as much detail in your goals as you like and remember to write 2      goals.
+
 Section: Your Goals 
 --- 
-question: Write 2 long term goals that you would like to achieve
+question: Write **2** long term goals that you would like to achieve
 Subquestion: |
-  Note: Long term goals can be goals that you would like to reach in a few years. These goals are goals that need e.g. specific skills that you need to attain over time e.g. getting a job. Press the help button for how to write about your goals. 
+  Long term goals can be goals that you would like to reach in a few years. These   goals are goals that need specific skills that you need to learn over       time e.g. getting a job. Press the help button for how to write about your       goals. 
 fields:
- My 2 long term goals (you can put as much detail in your goal as you like).:  longterm_goals
+ no label:  longterm_goals
  input type: area 
  
 help: |
@@ -426,6 +428,10 @@ help: |
   * Achievable (agreed, attainable). This means the goal is something that you can reach and are able to do;
   * Relevant (reasonable, realistic and resourced, results-based). This means that the goal is something that can be added into your life without causing any         problems; and
   * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be reached e.g. in two years. 
+
+under: |
+ You can put as much detail in your goals as you like and remember to write 2 goals.
+  
 ---
 objects:
   - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
@@ -575,7 +581,7 @@ subquestion: |
   
   ${ government_support.add_action() }
 ---
-question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
+question: What are you **not** able to do that you would like to start to learn to do or be able to do on your own? 
 subquestion: |
   For example, you would like to be able to cook for yourself or catch public transport on your own. 
 fields:
@@ -586,10 +592,10 @@ Section: Support You Need
 --- 
 question: Is there anything else you need help with?
 fields:
-  - Write other things you need help doing but dont have someone to help you do them: STmorehelp
+  - Write other things you need help doing but dont have someone to help you do      them: STmorehelp
     input type: area
-subquestion: |
-  For Example: Do you want to visit friends but do not have someone to come with you?
+under: |
+ For Example: Do you want to visit friends but do not have someone to come with you?
 ---
 question: Is there any other information you want the NDIS to know about you?
 fields:
@@ -612,6 +618,7 @@ under: |
   If no one has talked to you about picking someone to be in charge of your plan...select **I dont know yet**
   
   Ask these people to help you pick who you want in charge of *your plan*:
+ 
   -	A Local Area Coordinator (LAC) 
   
   -	An NDIA planner
