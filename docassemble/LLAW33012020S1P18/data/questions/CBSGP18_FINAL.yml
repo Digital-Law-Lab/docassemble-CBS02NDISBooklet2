@@ -290,11 +290,15 @@ fields:
     
 Section: Your Home 
 ---
-question: Write about what you do each day. Write about what you enjoy doing. 
+question: Write about your {daily routine}. 
+subquestion: |
+  
 fields: 
   - no label: ASAdaily
     input type: area
-    default: I go to a community centre three days a week. On other days I help mum at home with work there.  (still need to sort out this question- do not love it - seems repetitive) 
+    default: Every morning I take my dog for a walk. I go to a community centre three days a week. On days I do not go to the community centre I go to the library in the morning and cook with mum in the afternoon. 
+terms: 
+  daily routine: Daily routine means things you do every day or most days. 
 
 Section: What You Do
 --- 
@@ -316,7 +320,7 @@ subquestion: |
 fields: 
   - no label: ASAsometimes
     input type: area  
-    default: I go to the swimming pool with my sister once a month. I go to social group every second Thursday. My uncle takes me to the football a few times a year. 
+    default: I go to the swimming pool with my sister once a month. I go to a social group every second Thursday. My uncle takes me to the football a few times a year. 
 ---
 question: Write about what you like to do. 
 fields: 
@@ -345,6 +349,8 @@ code: |
   community_involvement.appendObject()
 ---
 question: Write about what you do for fun outside your home. Write about what you do in the community. 
+subquestion: | 
+  You can write about as many things as you want, just click the green button to add more.
 fields: 
   - Community Activity: community_involvement[i].name.text 
     choices: 
@@ -449,7 +455,10 @@ code: |
   important_people.appendObject()
   important_people.appendObject()
 ---
-question: Write about important people in your life who do not work in disability services. Write about what they do with you. For example, write about your family and friends. You can write about as many people as you would, just press the green button to add more. 
+question: Write about important people in your life who do not work in disability services. 
+subquestion: | 
+  Write about your family and friends and what they do for you. 
+  You can write about as many people as you want, just click the green button to add more. 
 fields: 
   - Important person: important_people[i].name.text 
     choices: 
