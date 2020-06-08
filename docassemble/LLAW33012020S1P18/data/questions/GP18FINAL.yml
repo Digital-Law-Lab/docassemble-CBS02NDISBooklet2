@@ -202,7 +202,9 @@ subquestion: |
   
   Your Local Area Coordinator (LAC) should be in touch to organise a meeting time and will contact you about it. 
   
-  **There is a pdf document available for you to download or email to yourself at the *bottom* of the page.** You will need to scroll down to find it. Make sure you download it or email it to yourself. Ask for help if you do not know how. 
+  **There is a pdf document available for you to download or email to yourself at the *bottom* of the page.** You will need to scroll down to find it.
+  
+  **Make sure you download it or email it to yourself. Ask for help if you do not know how.** 
   
   
   **Remember to bring these things to your meeting:**
@@ -569,7 +571,7 @@ section: Support You Use
 question: What kind of help do you get already and want to keep?
 subquestion: |
   List the people that help you each day and what they help you do. 
-  For Example: Do you have someone who...
+  For example, do you have someone who: 
   
   - takes you to appointments
   
@@ -577,7 +579,7 @@ subquestion: |
   
   - brings you food
   
-  - helps you do things at home (shower or clean) 
+  - helps you do things at home (for example, shower or clean) 
 fields:
   - no label: STcurrenthelp
     input type: area
@@ -635,13 +637,13 @@ subquestion: |
   
   ${ government_support.add_action() }
 ---
-question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
+question: What are you not able to do that you would like to learn to do? 
 subquestion: |
   For example, Would you like to be able to cook for yourself or catch public transport on your own? 
 fields:
  no label: learn_activity
  input type: area
- default: I would really like to start taking public transport. I would like to feel more confident to do so. I could do more on my own.  
+ default: I would really like to start taking public transport. I would like to feel more confident to do so. 
  
 Section: Support You Need
 --- 
@@ -694,7 +696,7 @@ Section: Your Plan
 ---
 question: You can bring someone along with you to your meeting for help.
 subquestion: |
-  Who would you like to bring? It is ok if you pick one but it changes before the planning meeting. 
+  Who would you like to bring? It is ok if this changes before your planning meeting. 
 fields:
   - no label: STbring
     datatype: target_variable
