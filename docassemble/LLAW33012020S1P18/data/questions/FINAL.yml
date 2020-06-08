@@ -1,0 +1,701 @@
+---
+objects: 
+  - endpoint: DADict
+---
+Features:
+  css: nav_bar.css
+  debug: false
+  hide standard menu: true
+---
+default screen parts:
+  post: |
+    <div style="display: flex; height: 100px; align-items: flex-end; flex-direction: row-reverse">
+    <div style="margin: 5px"><img src="https://staff.flinders.edu.au/etc.clientlibs/flinders/clientlibs/clientlib-site/resources/images/flinderuni_main_logo_black.png" height="40">
+    </div>
+    <div style="margin: 5px; text-align: center">
+    <cite><small><i>
+    Developed by Flinders University in collaboration with CBS Inc.
+    </i></small></cite>
+    </div>
+    </div>
+---
+metadata:
+  title: |
+   Preparing Booklet 2
+  authors:
+    - name: Ashleigh Mcnichol
+    - name: Ayat Hatem
+    - name: Stefanie Taylor 
+  organisation:  Flinders University
+---
+objects:
+  - CBSLogo: DAStaticFile.using(filename='CBS-logo-small-white.png')
+---
+mandatory: True
+code: |
+  STGmetadata = all_variables(special='metadata')
+  
+  STGlogostring = '<div class="media"><img src="'
+  
+  STGlogostring += CBSLogo.url_for()
+ 
+  STGlogostring += '" class="mr-2.8" height="52">'
+  STGlogostring += '<div class="media-body">'
+  STGlogostring += '<h5 class="mt-0">&nbsp; <b>' + STGmetadata['title'] + '</b></h5>'
+  STGlogostring += '</div></div>'
+  
+  set_parts(logo=STGlogostring)
+---
+features:
+  progress bar: True
+  navigation: True
+---
+sections:
+  - Introduction
+  - Disclaimer
+  - About You:
+    - Your Details
+    - Your Disability 
+    - Your Home
+    - What You Do
+    - Community Involvement
+    - What You Want To Do 
+  - Your Goals
+  - People In Your Life
+  - Your Support:
+    - Support You Use
+    - Support You Need
+  - Your Plan 
+  - Your Meeting
+  - End
+---
+# This is the welcome screen!!
+mandatory: True
+question: |
+ <span class="ASAheader">
+  Preparing for your NDIS planning meeting with CBS Inc. 
+  </span>
+  
+subquestion: |
+  This program can help you get ready for your NDIS planning meeting. An important part of the planning meeting is having your Booklet 2 filled out. This program can help you answer the questions to create that Booklet for your planning meeting. 
+
+  *This application is only for use by people with intellectual disabilities.* 
+  
+  **You should have a support worker with you while using this program.** ***If you are under 18 you must have a support worker or family member with you.***
+  
+   This program has some hard words. Ask a support worker or family member if you need help. 
+   
+   Answer all questions honestly. This is important. 
+   
+   Are you ready to start? If you need more help press 'NO' and talk to a support worker or family member before continuing. 
+   
+   [FILE checklist.png]
+   
+buttons: 
+  - Yes: continue
+  - No: exit
+    url: https://communitybridgingservices.org.au/ 
+
+section: Introduction
+---
+mandatory: True
+question: |
+  <span class="ASAdisclaimerheading">
+  ***Disclaimer***
+  </span>
+  
+subquestion: | 
+  <span class="ASAdisclaimer">
+  This program does ***not*** give legal advice. Any information in this application or the booklet it produces is not intended to be a subsitute for legal advice and should not be relied upon as legal advice. Appropriate legal advice should be sought in relation to any matters you may have. 
+  </span>
+  
+  This program can help you prepare for your planning meeting. It does not guarantee that you will receive funding from NDIS. 
+  
+  **The NDIA will make the final decision.**
+  
+  Do you agree to these terms? Ask a support worker or family member to explain them if you need. 
+  
+buttons:
+  -  Yes: continue
+  -  No: exit
+     url: https://communitybridgingservices.org.au/
+Section: Disclaimer 
+---
+# This code block drives the interview. Initial requirements. 
+mandatory: True
+code: | 
+  if ASAaccess == 'Yes': 
+    ASAfirstname
+    ASAage
+    ASAndisnumber
+    ASAimportant
+    ASAdisability 
+    ASAhome
+    ASAdaily
+    ASAjob
+    ASAsometimes
+    ASAlikes
+    individual_activity 
+    community_involvement.gather()
+    group_member
+    short_goals1
+    long_goals1
+    important_people.gather()
+    ASAMonday
+    STcurrenthelp
+    government_support.gather()
+    learn_activity
+    STmorehelp
+    STotherpersoninfo
+    STplan
+    STbring
+    endpoint['eligible']
+  else: 
+    endpoint['ineligible'] 
+---
+# This question block asks the questions to drive the code block above
+question: Have you been granted access to the NDIS as someone with an intellectual disability or developmental delay?  
+subquestion: |
+  Developmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
+fields: 
+  - no label:  ASAaccess
+    choices: 
+      - Yes
+      - No
+under: | 
+  If you CBS worker has told you to fill in this application then press 'YES'. 
+  
+  Press the [FILE continue.PNG] button to move to the next question. 
+ 
+  If you ever need to go back press the [FILE back.PNG] button in the top left corner of your screen. 
+
+Section: About You
+--- 
+# This is ineligible endpoint
+event: endpoint['ineligible']
+question: This application is only for individuals with intellectual disabilities who have been granted access to the NDIS. 
+subquestion: |
+    You cannot use this service. Please seek talk to a CBS worker, other support worker or a family member for help. 
+buttons: 
+  - Exit: exit
+  - Restart: restart
+    url: https://communitybridgingservices.org.au/
+
+section: About You
+---
+# This is the eligible endpoint
+event: endpoint['eligible']
+question: COMPLETED
+subquestion: |
+ **Please read this infomation carefully:**
+  
+  Your Local Area Coordinator (LAC) should be in touch to organise a meeting time and will contact you about it. 
+  
+  **There is a pdf document available for you to download or email to yourself at the *very bottom* of the page.** It is below the table that shows the answers you gave today. 
+  
+  Scroll down to the end (past the table below) of the page to find it. 
+  
+  **Remember to bring these things to your meeting:**
+  
+  - The pdf document at the very bottom of this page.
+  
+  -	Your bank account information. This means you must bring your account name, account number and BSB. 
+  
+  -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
+  
+  *Ask your Local Area Coordinator or a family member to help you!*
+ 
+  
+  
+    **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
+attachment: 
+  docx template file: JINJA_FINAL.docx
+  valid formats: 
+    - pdf
+buttons:
+  - Edit: restart
+  - Done: exit
+    url: https://communitybridgingservices.org.au/
+
+Section: End
+---
+question: Write your name.  
+subquestion: | 
+  Write your own name and not the name of someone who may be helping you. All of the questions will ask for **your details.** You should put your information in as you are the person applying for the plan.  
+fields: 
+  - First Name: ASAfirstname
+    datatype: text
+    default: Jane    
+  - Last Name: ASAlastname
+    datatype: text
+    default: Smith
+    
+section: Your Details
+---
+question: Write how old you are.  
+fields: 
+  - no label: ASAage
+    datatype: integer
+    default: 23 
+---
+question: Write your NDIS number. 
+fields: 
+  - no label: ASAndisnumber
+    datatype: integer
+    default: 123456789
+under: |
+  You can find your NDIS number on your NDIS access letter or on myplace through myGov. It will be 9 numbers and look something like this: 123456789. The pictures below show you how to find it on myplace. 
+  
+  **STEP 1-** Click *My Contact Details*
+  
+  [FILE number1.PNG, 1000px]
+  
+  **Step 2-** Click *Open Section* on the *About Me* tab
+  
+  [FILE number2.PNG, 1000px]
+  
+  **Step 3-** View NDIS Number
+  
+  [FILE number3.PNG, 1000px] 
+
+---
+question: Write about yourself. 
+subquestion: | 
+  What would you like us to know about you? Write about what makes you happy. Write about what is important to you. If you find it hard to do things that make you happy write about that too. Be honest. 
+fields: 
+  - no label: ASAimportant
+    input type: area
+    default: I like to be with my family and friends and they are very important to me. I like going to the movies and going shopping and bowling. Sometimes this can be hard because I need someone to drive me there. 
+
+Section: Your Details
+--- 
+question: Write about your intellectual disability or developmental delay. Write about how it effects your life. 
+subquestion: | 
+  Developmental delay means a person finds it hard to do everyday things. For example, have a conversation. 
+fields: 
+  - no label: ASAdisability 
+    input type: area
+    default: It can sometimes be difficult to have a conversation with people I do not know very well.  
+under: |
+  There is no wrong answer. If your disability affects your life a lot, it is ok to write that. Be honest and tell the truth. 
+
+section: Your Disability
+---
+question: Write about your home. Write about who you live with. 
+subquestion: |
+  Write about the people you live with and what you like about your home. 
+  Write about what could make living in your home easier. For example, having someone help you clean or do the gardening, or having a ramp installed. 
+fields: 
+  - no label: ASAhome
+    input type: area
+    default: I live at home with my partner and my mum. I am very close with my mum. I like living with them both because they can help me with some things I find more difficult like cooking. 
+    
+Section: Your Home 
+---
+question: Write about your daily routine. 
+subquestion: |
+  Daily routine means things you do every day or most days. 
+fields: 
+  - no label: ASAdaily
+    input type: area
+    default: Every morning I take my dog for a walk. I go to a community centre three days a week. On days I do not go to the community centre I go to the library in the morning and cook with mum in the afternoon. 
+ 
+
+Section: What You Do
+--- 
+question: Write about your job. This can include volunteer work. 
+subquestion: |
+  Volunteer work is work that helps your community and you are not paid for it. Normally volunteer work is at a place like schools, churches, animal shelters, local sports clubs, or for the environment. 
+fields: 
+  - no label: ASAjob
+    input type: area
+    datatype: text
+    default: I do not have a job but I volunteer at a local school sorting their sports gear. 
+    required: false
+ 
+---
+question: Write about what you do sometimes.
+subquestion: |
+  This could be things like going to the hairdresser or to visit a friend who lives far away. These are not things you do every day or week. 
+fields: 
+  - no label: ASAsometimes
+    input type: area  
+    default: I go to the swimming pool with my sister once a month. I go to a social group every second Thursday. My uncle takes me to the football a few times a year. 
+---
+question: Write about what fun things you like to do. 
+subquestion: |
+  There is no wrong answer. Write about anything that you like to do. For example: gardening, going to class, being with friends. Write about if you sometimes find it difficult to do the things you like. 
+fields: 
+  - no label: ASAlikes
+    input type: area
+    datatype: text
+    default: On the weekends I like to spend time with my friends. I like to walk our new puppy and care for him. I like to go for walks but sometimes need help getting ready to go. 
+---
+question: What do like being able to do in your life now?  
+subquestion: | 
+  This can be things like enjoying that you have learnt to look after your pet or have learnt to have a shower without a support worker. It can also be something like enjoying being in charge of your own money. 
+fields:
+ no label: individual_activity
+ input type: area 
+ default: I like walking my dog. I like to cook with the help of my mum and partner and have learnt new cooking skills from them. 
+ 
+--- 
+objects:
+  - community_involvement: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  community_involvement.appendObject()
+  community_involvement.appendObject()
+---
+question: Write about what you do for fun outside your home. Write about what you do in the community. 
+subquestion: | 
+  You can write about as many things as you want, click the [FILE another.PNG] button to add more.
+fields: 
+  - Community Activity: community_involvement[i].name.text 
+    choices: 
+    - Exercise and Sports
+    - Volunteering  
+    - Church
+    - Public Transport 
+    - Visiting Parks and Beaches
+    - Library
+    - Going to the Movies 
+    - Classes
+    - Other Activities
+    required: false
+    default: Library
+  - Write about it here: community_involvement[i].info
+    input type: area
+    required: false
+    default: I am a member of the local library and sometimes attend events there with my mum. 
+   
+list collect:
+  enable: not community_involvement.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about your community involvement.
+
+Section: Community Involvement 
+---
+question: Do you want to add any more activities?
+yesno: community_involvement.there_is_another
+---
+table: com_involvement_table
+rows: community_involvement
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ com_involvement_table }
+  
+  ${ community_involvement.add_action() }
+---
+question: Are you a part of any groups? 
+subquestion: |
+ This could be things like being part of a choir, a church group, an arts and crafts group, drama group or a volunteer team. 
+fields:
+  - no label: group_member
+    input type: area 
+    default: I go to a social craft group with a friend a few times a month. 
+--- 
+question: Write 2 short term goals that you would like to achieve
+subquestion: |
+  A short term goal is something you want to do soon. This can mean today, this week, this month, or even this year. Write about how you will achieve them and any help you might need. Press the [FILE hbutton3.png, 60px] button for how to write about your goals. 
+fields:
+  - Goal 1: short_goals1
+    input type: area 
+    rows: 10
+    default: This year I want to be able to catch public transport by myself so I can go to my library events without mum. 
+  - Goal 2: short_goals2
+    input type: area 
+    rows: 10
+    default: I want to start learning how to shower myself without a support worker as soon as possible.  
+ 
+help: |
+  When thinking of a goal try to make sure it is clear and possible to do. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  
+  * Specific (simple, sensible, significant). This means that it is clear, and you    know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you would be able to know       when your goal is achieved. To do this you need to answer questions such as; how   much? And, in how much time?  For example: writing that you want to be able to run is not measurable, you need to know how many far you would like to run and in what time frame; 
+  * Achievable (agreed, attainable). This means the goal is something that you can   reach and are able to do with some effort or practise;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that   the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be   reached e.g. by next Monday.
+
+Section: Your Goals 
+--- 
+question: Write 2 long term goals that you would like to achieve
+Subquestion: |
+   A long term goal is something you would like to reach in a few years. It is important to write down the steps that it would take for you to reach these goals. Also write about any help you might need to reach them. Press the [FILE hbutton3.png, 60px] button for how to write about your goals.  
+fields:
+  - Goal 1: long_goals1
+    input type: area 
+    rows: 10
+    default: In the next few years, I want to move out of home, maybe with a friend. To do this I would need to save money, practise cooking and showering on my own and practise catching public transport. 
+  - Goal 2: long_goals2
+    input type: area
+    rows: 10
+    default: Get a job so that I can pay my own bills. To do this I would need to practise talking to strangers. I would need to write a resume and get a friend to help me. I would also have to practise catching public transport. 
+ 
+help: |
+  When thinking of a goal try to make sure it is clear and possible to do. Use the SMART goal guide to see whether you need to adjust your goals.  Make sure your goal is: 
+  
+  * Specific (simple, sensible, significant). This means that it is clear, and you know why you want to reach that goal;
+  * Measurable (meaningful, motivating). This means you would be able to know       when your goal is achieved. To do this you need to answer questions such as; how much? And, in how much time? For example: writing that you want to be able to run is not measurable, you need to know how many far you would like to run and in what time frame;
+  * Achievable (agreed, attainable). This means the goal is something that you can reach and are  able to do with some effort or practise;
+  * Relevant (reasonable, realistic and resourced, results-based). This means that the goal is something that can be added into your life without causing any         problems; and
+  * Time bound (time-based, time limited, time/cost limited, timely, time-           sensitive). You need to be able to set a time limit for when this goal should be reached e.g. in two years. 
+---
+objects:
+  - important_people: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  important_people.appendObject()
+  important_people.appendObject()
+---
+question: Write about important people in your life who do not work in disability services. 
+subquestion: | 
+  Write about your family and friends and what they do for you. 
+  You can write about as many people as you want, click the [FILE another.PNG] button to add more. 
+fields: 
+  - Important person: important_people[i].name.text 
+    choices: 
+    - Mother
+    - Father  
+    - Brother
+    - Sister
+    - Friend  
+    - Other Family Member
+    - Other Important Person 
+    required: false
+    default: Mother
+  - Write about them here: important_people[i].info
+    input type: area 
+    required: false
+    default: My mum helps me with many things. She helps me cook and clean and do alot of general every day things around the house. 
+    
+list collect:
+  enable: not important_people.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about an important person.
+
+Section: People In Your Life
+---
+question: Do you want to add any more people?
+yesno: important_people.there_is_another
+---
+table: impt_people_table
+rows: important_people
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ impt_people_table }
+  
+  ${ important_people.add_action() }
+---  
+question: Write about what you do each week. Write about what supports you use to do these things. 
+subquestion: |
+  Supports can include things like needing a carer or family member to take you places, a walking frame, or a support animal. Write about anything that helps you do your daily tasks. 
+fields: 
+  - __MONDAY__: ASAMonday
+    input type: area 
+    default: Every Monday I see my psychologist. 
+  - Monday supports: ASAMondaysup
+    input type: area 
+    default: My mum drives me to these appointments. I have a mental health care plan from my doctor that helps me pay for these visits. 
+  - __TUESDAY__: ASATuesday
+    input type: area
+    default: I volunteer at my local school.  
+  - Tuesday supports: ASATuesdaysup
+    input type: area
+    default: Mum drives me to the school. The school is big and I sometimes need help getting around. 
+  - __WEDNESDAY__: ASAWednesday
+    input type: area
+    default: I go to the library. 
+  - Wednesday supports: ASAWednesdaysup
+    input type: area
+    default: Some Wednesdays my library has local events that I like to go to. I am not confident getting the bus there yet so mum will attend with me.  
+  - __THURSDAY__: ASAThursday
+    input type: area
+    default: Dance classes. 
+  - Thursday supports: ASAThursdaysup
+    input type: area
+    default: Mum drives me. My friends help me in class. 
+  - __FRIDAY__: ASAFriday
+    input type: area
+    default: Movie night. 
+  - Friday supports: ASAFridaysup
+    input type: area
+    default: My partner and I go to the movies most Friday nights. Having a job would make this easier so I could spend my own money. 
+  - __SATURDAY__: ASASaturday
+    input type: area
+    default: I normally see my friends on the weekend. 
+  - Saturday supports: ASASaturdaysup
+    input type: area
+    default: My friends sometimes come to our house. Sometimes a support worker comes on Saturdays when I do not see friends so that I can go to the museum in the city. 
+  - __SUNDAY__: ASASunday
+    input type: area
+    default: My mum and I get ready for the week. 
+  - Sunday supports: ASASundaysup
+    input type: area
+    default: A support worker normally comes to see me on Sundays and she helps mum and I get ready for the week. 
+
+section: Support You Use
+---
+question: What kind of help do you get already and want to keep?
+subquestion: |
+  List the people that help you each day and what they help yu=ou do. 
+  For Example: Do you have someone who...
+  
+  - takes you to appointments
+  
+  - helps you go shopping
+  
+  - brings you food
+  
+  - helps you do things at home (shower or clean) 
+fields:
+  - no label: STcurrenthelp
+    input type: area
+    default: Mum helps me with alot of things. She drives me and helps me cooking and other general house kind of things. I have a support worker who helps me with some social situations. 
+---
+objects:
+  - government_support: DAList.using(object_type=Thing, there_are_any=True, minimum_number = 2)
+---
+mandatory: True
+code: |
+  government_support.appendObject()
+  government_support.appendObject()
+---
+question: Write about what other government supports or services you use. Write about when you use them. 
+subquestion: |
+  You can write about as many as you want, click the [FILE another.PNG] button to add more.
+fields: 
+  - Government service: government_support[i].name.text 
+    choices: 
+    - School
+    - University  
+    - TAFE
+    - Public Transport
+    - Public Doctor 
+    - Library
+    - Other services, including local council services
+    required: false
+    default: Public Doctor
+  - Write about it here: government_support[i].info
+    input type: area
+    required: false
+    default: I see a good doctor at our local clinic who works closely with my psychologist. 
+list collect:
+  enable: not government_support.has_been_gathered()
+  is final: False
+  allow delete: False
+  label: |
+    Please enter information about a government service you use.  
+---
+question: Do you want to add any more?
+yesno: government_support.there_is_another
+---
+table: govt_support_table
+rows: government_support
+columns:
+  - Person: row_item.name.text
+  - About: row_item.info
+edit:
+  - name.text
+---
+mandatory: True
+question: Here is the table
+subquestion: |
+  ${ govt_support_table }
+  
+  ${ government_support.add_action() }
+---
+question: What are you not able to do that you would like to start to learn to do or be able to do on your own? 
+subquestion: |
+  For example: you would like to be able to cook for yourself or catch public transport on your own. 
+fields:
+ no label: learn_activity
+ input type: area
+ default: I would really like to start taking public transport. I would like to feel more confident to do so. I could do more on my own.  
+ 
+Section: Support You Need
+--- 
+question: Is there anything else you need help with?
+subquestion: |
+  Write about things you need help doing but do not have someone to help you do them. For example, do you want to visit friends but do not have someone to come with you? 
+fields:
+  - no label: STmorehelp
+    input type: area
+    default: I would like to visit some group therapy classes that are too far away for my mum to take me. 
+---
+question: Is there any other information you want the NDIS to know about you? 
+fields:
+  - no label: STotherpersoninfo
+    input type: area
+    default: I believe I have already written about everything. 
+under: |
+  For example: Is it hard for you to get dressed but you haven’t told us about it yet? 
+  **If you think you have told us everything then you can also use this space to write down any questions you want to ask at the planning meeting.** 
+---
+question: Nearly done! The answers you have given will make a booklet for you to take to your planning meeting.  
+subquestion: |
+  **You need to have a planning meeting to help you possibly get an NDIS plan. People with an NDIS plan get support and services for things that they need.** 
+fields:
+  - Who would you like to be in charge of your plan?: STplan
+    datatype: target_variable
+    choices:
+    - I do not know yet
+    - I want to be in charge
+    - A Plan Manager 
+    - The NDIA
+    default: I want to be in charge
+
+under: |
+  If no one has talked to you about picking someone to be in charge of your plan...select **I do not know yet**
+  
+  Ask these people to help you pick who you want in charge of *your plan*:
+  
+  -	A Local Area Coordinator (LAC)  
+  
+  -	An NDIA planner
+  
+  The document given to you at the end of this interview will give you more information on this. 
+  
+Section: Your Plan
+---
+question: You can bring someone along with you to your meeting for help.
+subquestion: |
+  Who would you like to bring? It is ok if you pick one but it changes before the planning meeting. 
+fields:
+  - no label: STbring
+    datatype: target_variable
+    choices:
+    - Mum
+    - Dad
+    - Support worker
+    - Carer 
+    - Friend
+    - Sister
+    - Brother
+    - No one
+    - Other
+    default: Mum 
+   
+    
+section: Your Meeting
+---
