@@ -69,7 +69,19 @@ sections:
   - Your Meeting
   - End
 ---
+
+image sets:
+  freepik:
+    attribution: |
+      Icon made by [Freepik](http://www.flaticon.com/authors/freepik)
+    images:
+      checklist: checklist.png
+      
+---
+
+---
 # This is the welcome screen!!
+decoration: checklist
 mandatory: True
 question: |
  <span class="ASAheader">
@@ -88,6 +100,8 @@ subquestion: |
    Answer all questions honestly. This is important. 
    
    Are you ready to start? If you need more help press 'NO' and talk to a support worker or family member before continuing. 
+   
+   
 buttons: 
   - Yes: continue
   - No: exit
