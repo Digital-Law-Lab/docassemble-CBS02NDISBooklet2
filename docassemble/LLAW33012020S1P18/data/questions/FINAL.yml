@@ -69,19 +69,7 @@ sections:
   - Your Meeting
   - End
 ---
-
-image sets:
-  freepik:
-    attribution: |
-      Icon made by [Freepik](http://www.flaticon.com/authors/freepik)
-    images:
-      checklist: checklist.png
-      
----
-
----
 # This is the welcome screen!!
-decoration: checklist
 mandatory: True
 question: |
  <span class="ASAheader">
@@ -101,11 +89,12 @@ subquestion: |
    
    Are you ready to start? If you need more help press 'NO' and talk to a support worker or family member before continuing. 
    
+   [FILE checklist.png]
    
 buttons: 
   - Yes: continue
   - No: exit
-    url: https://communitybridgingservices.org.au/
+    url: https://communitybridgingservices.org.au/ 
 
 section: Introduction
 ---
@@ -137,8 +126,29 @@ mandatory: True
 code: | 
   if ASAaccess == 'Yes': 
     ASAfirstname
+    ASAage
     ASAndisnumber
-    important_people[0]
+    ASAimportant
+    ASAdisability 
+    ASAhome
+    ASAdaily
+    ASAjob
+    ASAsometimes
+    ASAlikes
+    individual_activity 
+    community_involvement.gather()
+    group_member
+    short_goals1
+    long_goals1
+    important_people.gather()
+    ASAMonday
+    STcurrenthelp
+    government_support.gather()
+    learn_activity
+    STmorehelp
+    STotherpersoninfo
+    STplan
+    STbring
     endpoint['eligible']
   else: 
     endpoint['ineligible'] 
@@ -194,49 +204,7 @@ subquestion: |
   -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
   
   *Ask your Local Area Coordinator or a family member to help you!*
-  
-  **Below is a table containing the interview questions and your responses.**
-  
-  **Question** | **Your Answer**
-  -------------|----------------
-  Access Granted?         | ${ ASAaccess } 
-  Name                    | ${ ASAfirstname } ${ ASAlastname }     
-  Age                     | ${ ASAage } 
-  NDIS Number             | ${ ASAndisnumber } 
-  About You               | ${ ASAimportant } 
-  Disability Impact       | ${ ASAdisability }  
-  Your Home               | ${ ASAhome } 
-  Daily Tasks             | ${ ASAdaily } 
-  Job                     | ${ ASAjob } 
-  Things you do Sometimes | ${ ASAsometimes } 
-  Likes                   | ${ ASAlikes } 
-  Enjoyable Activities    | ${ individual_activity } 
-  %for item in community_involvement:
-  ${item.name}            | ${item.info}
-  %endfor
-  Group Membership        | ${ group_member }
-  Short Term Goals        | ${ short_goals1 }, ${ short_goals2 } 
-  Long Term Goals         | ${ long_goals1 }, ${ long_goals2 } 
-  %for impt_person in important_people:
-  ${impt_person.name}     |${impt_person.info}
-  %endfor 
-  Monday Tasks            | ${ ASAMonday }, ${ ASAMondaysup }
-  Tuesday Tasks           | ${ ASATuesday }, ${ ASATuesdaysup} 
-  Wednesday Tasks         | ${ ASAWednesday }, ${ ASAWednesdaysup }
-  Thursday Tasks          | ${ ASAThursday }, ${ ASAThursdaysup } 
-  Friday Tasks            | ${ ASAFriday }, ${ ASAFridaysup } 
-  Saturday Tasks          | ${ ASASaturday }, ${ ASASaturdaysup } 
-  Sunday Tasks            | ${ ASASunday }, ${ ASASundaysup }
-  Current Help            | ${ STcurrenthelp }
-  %for item in government_support:
-  ${item.name}            | ${item.info}
-  %endfor
-  New Tasks               | ${ learn_activity } 
-  Further Help            | ${ STmorehelp }
-  Other Information       | ${ STotherpersoninfo } 
-  Plan Supervisor         | ${ STplan }
-  Meeting Companion       | ${ STbring } 
-  
+ 
   
   
     **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
@@ -691,14 +659,14 @@ fields:
   - Who would you like to be in charge of your plan?: STplan
     datatype: target_variable
     choices:
-    - I dont know yet
+    - I do not know yet
     - I want to be in charge
     - A Plan Manager 
     - The NDIA
     default: I want to be in charge
 
 under: |
-  If no one has talked to you about picking someone to be in charge of your plan...select **I dont know yet**
+  If no one has talked to you about picking someone to be in charge of your plan...select **I do not know yet**
   
   Ask these people to help you pick who you want in charge of *your plan*:
   
