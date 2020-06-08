@@ -341,7 +341,7 @@ fields:
     datatype: text
     default: On the weekends I like to spend time with my friends. I like to walk our new puppy and care for him. I like to go for walks but sometimes need help getting ready to go. 
 ---
-question: What do like being able to do in your life now?  
+question: What do you like being able to do in your life now?  
 subquestion: | 
   This can be things like enjoying that you have learnt to look after your pet or have learnt to have a shower without a support worker. It can also be something like enjoying being in charge of your own money. 
 fields:
@@ -665,9 +665,10 @@ under: |
 decoration: nearlydone
 question: Nearly done! The answers you have given will make a booklet for you to take to your planning meeting.  
 subquestion: |
-  **You need to have a planning meeting to help you possibly get an NDIS plan. People with an NDIS plan get support and services for things that they need.** 
+  Who would you like to be in charge of your plan?
+
 fields:
-  - Who would you like to be in charge of your plan?: STplan
+  - no label: STplan
     datatype: target_variable
     choices:
     - I do not know yet
@@ -677,6 +678,8 @@ fields:
     default: I want to be in charge
 
 under: |
+ **You need to have a planning meeting to help you possibly get an NDIS plan. People with an NDIS plan get support and services for things that they need.** 
+  
   If no one has talked to you about picking someone to be in charge of your plan...select **I do not know yet**
   
   Ask these people to help you pick who you want in charge of *your plan*:
