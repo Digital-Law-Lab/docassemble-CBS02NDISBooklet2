@@ -1,6 +1,7 @@
 # P18
 
 
+
 # This application is designed to aid CBS clients who have intellectual disabilities to complete *Booklet 2* for their NDIS planning meeting. 
 
 # Preparing for a planning meeting can be an overwhelming and difficult process. It is important to be adequately prepared for a planning meeting as it plays a large role in determing how much financial support an individual will be granted as part of their plan. 
