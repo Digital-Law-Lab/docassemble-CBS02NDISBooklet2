@@ -212,8 +212,8 @@ subquestion: |
   -	Your MyGov account information, this can be found on your MyGov under 'Account Settings'. 
   
   *Ask your Local Area Coordinator or a family member to help you!*
- 
-  **This document was filed on ${ today() } at ${ format_time(current_datetime()) }** 
+
+  **Make sure you download or email your document before you exit!!**
 attachment: 
   docx template file: JINJA_FINAL.docx
   valid formats: 
