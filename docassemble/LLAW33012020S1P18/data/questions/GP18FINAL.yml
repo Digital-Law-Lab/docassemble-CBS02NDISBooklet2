@@ -83,11 +83,17 @@ decoration: checklist
 mandatory: True
 question: |
  <span class="ASAheader">
-  Preparing for your NDIS Planning Meeting 
+ The NDIS will now meet with you, This is called the planning meeting. 
   </span>
   
 subquestion: |
-  An important part of preparing for your NDIS planning meeting is having your Booklet 2 filled out. This program can help you answer the questions to create that Booklet for your planning meeting. 
+ In this meeting, they will work out your plan.  
+
+ Your plan will have the goals they can help with. 
+
+ The plan will show how much money you have to spend.
+
+ An important part of preparing for your NDIS planning meeting is having your Booklet 2 filled out. This program can help you answer the questions to create that Booklet for your planning meeting. 
 
   *This application is only for use by people with intellectual disabilities.* 
   
@@ -339,7 +345,7 @@ fields:
 ---
 question: What do you like being able to do in your life now?  
 subquestion: | 
-  This can be things like enjoying that you have learnt to look after your pet or have learnt to have a shower without a support worker. It can also be something like enjoying being in charge of your own money. 
+  This can be things like learning how to look after your pet or learning to paint. It can also be something like enjoying being in charge of your own money. 
 fields:
  no label: individual_activity
  input type: area 
@@ -407,9 +413,9 @@ fields:
   - no label: group_member
     input type: area 
 --- 
-question: What are two of your short term goals?
+question: What are two of your goals?
 subquestion: |
-  A short term goal is something you want to do soon. This can mean today, this week, this month, 
+  A goal is something you want to do soon. This can mean today, this week, this month, 
   or even this year. Tell us about how you will achieve them and any help you might need.
   Press the [FILE hbutton3.png, 60px] button for how to write about your goals. 
 fields:
@@ -498,7 +504,7 @@ subquestion: |
   
   ${ important_people.add_action() }
 ---  
-question: Tell us about what you do each week. 
+question: What do you do for fun, when do you go out? 
 subquestion: |
   What supports do you use to do these things?
 
@@ -552,7 +558,7 @@ subquestion: |
   
   - brings you food
   
-  - helps you do things at home (for example, shower or clean) 
+  - helps you do things at home (for example, chores or hygiene) 
 fields:
   - no label: STcurrenthelp
     input type: area
